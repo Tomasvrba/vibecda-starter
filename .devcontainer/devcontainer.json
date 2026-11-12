@@ -1,5 +1,5 @@
 {
-  "name": "vibeCDA · game studio",
+  "name": "vibeCDA \u00b7 game studio",
   "remoteUser": "node",
   "forwardPorts": [
     5173
@@ -11,7 +11,7 @@
       "visibility": "private"
     }
   },
-  "onCreateCommand": "node scripts/bootstrap.mjs",
+  "onCreateCommand": "bash .devcontainer/configure-shell.sh && node scripts/bootstrap.mjs",
   "postAttachCommand": "cat docs/welcome.txt",
   "customizations": {
     "vscode": {
@@ -22,5 +22,8 @@
       }
     }
   },
-  "image": "ghcr.io/tomasvrba/vibecda-dev:f7779fb13b3c3910a7f9a189bc011b7085d9b68f"
+  "image": "ghcr.io/tomasvrba/vibecda-dev:f7779fb13b3c3910a7f9a189bc011b7085d9b68f",
+  "features": {
+    "ghcr.io/devcontainers/features/sshd:1.1.0": {}
+  }
 }

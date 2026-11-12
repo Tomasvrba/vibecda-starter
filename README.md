@@ -14,8 +14,6 @@ venue updates, and registration. This starter is optional; native games are welc
 Judging closes Sunday at 5:30pm Pacific. Each track uses its own five criteria,
 weighted equally at 20% each.
 
-[Play the starter demo](https://tmsvr.itch.io/vibecda-starter-demo).
-
 ## Start in Codespaces
 
 On this repository, select **Use this template → Open in a codespace**.
@@ -35,6 +33,9 @@ point on the game. Change `src/game.ts` to make it yours.
 The prepared container includes Claude Code, Codex, Gemini CLI, Chromium with
 Playwright, ffmpeg, ImageMagick, zip, and ripgrep. Pick one AI tool and log into
 your own account; see [participant instructions](docs/participants.md).
+
+See [installed tools and game resources](docs/tools.md) and
+[connect VS Code, SSH editors, or T3 Code](docs/editors.md).
 
 ## Run locally
 

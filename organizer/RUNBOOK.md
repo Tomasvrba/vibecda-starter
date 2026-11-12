@@ -20,6 +20,13 @@
    don't inherit the original's repository settings. Don't enable billing or
    paid services just to get prebuilds without checking the budget with Tom.
 
+Both devcontainer configurations add the official SSH server feature and set the
+AI CLI PATH for login shells. Existing Codespaces must pull and rebuild. For
+external editors and T3 Code, follow docs/editors.md and rehearse the full route
+from a participant laptop; local SSH/container testing alone is not that pilot.
+Keep docs/tools.md aligned with image versions. Browser art/audio resources need
+no container installation; native desktop engines remain participant-managed.
+
 ## Event settings and hub
 
 Edit organizer/event.json with the final URLs and settings. Dates, tracks, team

@@ -12,6 +12,12 @@ each verified milestone. Do not treat prepared files as configured live services
   packaged ZIP under a nested path inside an iframe; all three pass in GitHub CI.
 - Devcontainer image built and tested offline. All tools run; a fresh workspace
   passes eight infrastructure tests, build/ZIP packaging, and two browser tests.
+- Added the official SSH server feature to both container configurations and a
+  login-shell PATH fix for the AI CLIs. A fresh local devcontainer built and
+  bootstrapped successfully; real SSH login resolved and ran Claude, Codex, and
+  Gemini. Existing Codespaces must pull and rebuild to get this configuration.
+  docs/tools.md inventories installed tools and recommends optional game resources;
+  docs/editors.md covers desktop VS Code, SSH editors, and T3 Code's SSH route.
 - Participant guide, agent instructions, draft pre-arrival message, itch.io settings,
   event hub generator, scoring audit tool, and archive structure.
 - Site schedule and criteria inspected. Tom requested equal-weight criteria,
@@ -35,11 +41,10 @@ each verified milestone. Do not treat prepared files as configured live services
   their usernames. Reusable public jam copy is archived under organizer/jams/.
 - Editable SVG and 630 × 500 PNG covers are saved in organizer/assets/. Both
   track covers are attached to the live jams and their saved thumbnails verified.
-- Uploaded and published the starter as a separate free, unlisted HTML demo:
-  https://tmsvr.itch.io/vibecda-starter-demo (project ID 5349310).
-  Its actual itch.io iframe was tested in an anonymous browser: renders, collects
-  a spark using keyboard controls, and restarts, with no page errors. This demo is
-  clearly labeled as a rehearsal and has not been entered in either competition.
+- A separate upload rehearsal passed anonymous itch.io iframe rendering,
+  keyboard collection, and restart with no page errors. Tom requested removal
+  afterwards; project 5349310 is now unpublished (Draft), verified in its settings,
+  and participant-facing links and demo cover files have been removed.
 - Two track jams and Sunday 5:30pm judging end confirmed by Tom. A printable audience ballot is
   prepared in audience-ballot.html; per-track audience awards need confirmation.
 - Tom does not manage the existing website. Prepared site-change-request.md for
@@ -56,12 +61,17 @@ each verified milestone. Do not treat prepared files as configured live services
 - Add judge accounts (Tom will supply usernames later), confirm audience-choice
   policy, and rehearse a jam entry and rating with a real judge account.
 - Test a participant-owned Codespace and AI login using that person's own account.
+  Include a full T3 Code desktop → Codespace pilot if participants want T3;
+  the local SSH test does not verify that complete integration.
 
 ## Undo
 
 Changes are additive in this repository. Archive the new template repo and remove
 the added participant hub/page links to retire the setup. Unpublish the two event
-jams and switch the starter demo to Draft to withdraw these new itch.io pages
-without deleting their data. Keep participant projects and credentials.
+jams to withdraw the event pages without deleting their data. The retired
+rehearsal project is already Draft. Keep participant projects and credentials.
 Docker image/cache and temporary Chromium
 downloads can be removed selectively after testing.
+The demo can be republished from its itch.io dashboard if desired. Repository
+changes can be reverted with Git; reverting the SSH changes requires another
+container rebuild and removes that external-editor connection route.

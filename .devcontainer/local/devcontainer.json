@@ -1,9 +1,22 @@
 {
-  "name": "vibeCDA · local build (including Apple Silicon)",
-  "build": { "dockerfile": "../Dockerfile", "context": "../.." },
+  "name": "vibeCDA \u00b7 local build (including Apple Silicon)",
+  "build": {
+    "dockerfile": "../Dockerfile",
+    "context": "../.."
+  },
   "remoteUser": "node",
-  "forwardPorts": [5173],
-  "portsAttributes": { "5173": { "label": "Your game", "onAutoForward": "openBrowser" } },
-  "onCreateCommand": "node scripts/bootstrap.mjs",
-  "postAttachCommand": "cat docs/welcome.txt"
+  "forwardPorts": [
+    5173
+  ],
+  "portsAttributes": {
+    "5173": {
+      "label": "Your game",
+      "onAutoForward": "openBrowser"
+    }
+  },
+  "onCreateCommand": "bash .devcontainer/configure-shell.sh && node scripts/bootstrap.mjs",
+  "postAttachCommand": "cat docs/welcome.txt",
+  "features": {
+    "ghcr.io/devcontainers/features/sshd:1.1.0": {}
+  }
 }

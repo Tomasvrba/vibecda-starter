@@ -25,14 +25,12 @@ https://itch.io/jam/422198/admins and https://itch.io/jam/422199/admins.
 Do not give judge-only users host/admin rights unnecessarily. Results stay hidden
 until the host clears **Hide results** after applying the announced tie policies.
 
-## Starter demo / upload rehearsal
-
-https://tmsvr.itch.io/vibecda-starter-demo
+## Retired upload rehearsal
 
 Edit: https://itch.io/game/edit/5349310
 
-This is a free, public-but-unlisted HTML prototype with generative AI disclosure,
-960 × 720 embed, fullscreen, and mobile support. It is not entered in either jam.
+Tom requested removal; this project is now unpublished (Draft), with its saved
+visibility verified. It was not entered in either jam.
 The uploaded `artifacts/game.zip` rendered, collected a spark using keyboard
 controls, and restarted inside the real itch.io iframe in a fresh anonymous
 browser context. No page errors were observed.
