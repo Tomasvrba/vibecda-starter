@@ -1,12 +1,15 @@
 # itch.io setup package
 
-Status: prepared locally; itch.io login/security verification and live jam setup
-remain pending. Tom requested equal-weight judging on 2026-11-12. The event site
+Status: signed into itch.io as tmsvr. Live jam creation requires Tom to verify the
+account's email; the first creation attempt was rejected for that reason. Tom
+requested equal-weight judging on 2026-11-12. The event site
 currently shows weighted criteria and must be updated to match before launch.
 
 ## Event settings
 
-- Host account: confirm the signed-in itch.io account with Tom.
+- Host account: tmsvr (Tom completed GitHub OAuth in native Chrome).
+- Track covers: organizer/assets/freeplay.png and wizards-and-lizards.png.
+  Editable SVG sources are included alongside them.
 - Starts: Friday November 13, 2026, 6pm America/Los_Angeles (UTC−08:00).
 - Submission deadline: Sunday November 15, 2026, noon, same timezone.
 - Judging end: Sunday 5:30pm, ahead of 6pm awards; confirmed by Tom.
@@ -16,6 +19,8 @@ currently shows weighted criteria and must be updated to match before launch.
 - Add judges and host/admin collaborators by their itch.io accounts.
 - Create two track jams, confirmed by Tom: Freeplay and Wizards and Lizards.
   Each retains its own five criteria, equally weighted. GTA Cda remains unjudged.
+- Publish as unlisted: participants can follow the direct links, without listing
+  this local event in itch.io's global jam calendar.
 
 ## Ready-to-paste description
 

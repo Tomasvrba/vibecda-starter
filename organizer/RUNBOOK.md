@@ -73,7 +73,8 @@ check judge identities, conflicts, eligibility, or audience ballots.
 
 - Complete itch.io login and any security verification, confirm the owning account.
 - Create the two confirmed track jams and add real judge accounts.
-- Identify the existing site's repository/hosting and back it up before changing it.
+- Tom forwards site-change-request.md to the existing site's webmaster; Tom does
+  not manage the site directly.
 - Match the public rules to Tom's equal-weight judging instruction.
 - Agree on audience-choice ballot and any unresolved rules (existing code, ties,
   late submissions). Do not invent eligibility or prizes.

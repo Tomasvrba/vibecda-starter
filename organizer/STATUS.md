@@ -23,8 +23,11 @@ each verified milestone. Do not treat prepared files as configured live services
   Published image: ghcr.io/tomasvrba/vibecda-dev:f7779fb13b3c3910a7f9a189bc011b7085d9b68f
   The default devcontainer now references this prepared image. A local-build
   configuration is also available for Apple Silicon and image rebuilds.
-- Native Chrome reached itch.io login after passing Cloudflare. GitHub OAuth login
-  needs Tom to sign into GitHub in that native Chrome session.
+- Native Chrome passed Cloudflare and Tom completed GitHub OAuth into itch.io.
+  Authenticated host account: tmsvr. Freeplay creation was rejected because itch.io
+  requires email verification before hosting a jam. The filled form is preserved;
+  neither track jam has been created yet. Tom has been asked to verify the email.
+- Editable SVG and 630 × 500 PNG track covers are prepared in organizer/assets/.
 - Two track jams and Sunday 5:30pm judging end confirmed by Tom. Jam configuration
   and descriptions are ready in itch-setup.md. A printable audience ballot is
   prepared in audience-ballot.html; per-track audience awards need confirmation.
@@ -36,7 +39,7 @@ each verified milestone. Do not treat prepared files as configured live services
 
 ## Pending live setup / human input
 
-- Complete native-browser GitHub sign-in for itch.io and confirm the itch.io account.
+- Complete itch.io email verification; login is already working in native Chrome.
 - Create the two track jams with their respective equal-weight criteria.
 - Tom forwards site-change-request.md to the webmaster to add guide links and
   update the displayed rubric weights.
