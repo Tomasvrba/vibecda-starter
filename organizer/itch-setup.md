@@ -1,9 +1,11 @@
 # itch.io setup package
 
-Status: signed into itch.io as tmsvr. Live jam creation requires Tom to verify the
-account's email; the first creation attempt was rejected for that reason. Tom
-requested equal-weight judging on 2026-11-12. The event site
-currently shows weighted criteria and must be updated to match before launch.
+Status: both track jams are published under tmsvr after Tom completed email
+verification. Freeplay: https://itch.io/jam/vibecda-2026-freeplay;
+Wizards and Lizards: https://itch.io/jam/vibecda-2026-wizards-and-lizards.
+Saved dates, criteria, upload locking, hidden results, and judges-only voting
+were read back and verified. Tom will supply judge usernames later.
+The event site currently shows weighted criteria and must be updated to match.
 
 ## Event settings
 

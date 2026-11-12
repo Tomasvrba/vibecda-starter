@@ -3,7 +3,7 @@
 Updated 2026-11-12. Live publication is in progress; this file is updated after
 each verified milestone. Do not treat prepared files as configured live services.
 
-## Completed locally
+## Completed and published
 
 - Phaser/Vite/TypeScript starter with a playable original game.
 - Build and itch.io ZIP packaging; production build passes.
@@ -23,27 +23,31 @@ each verified milestone. Do not treat prepared files as configured live services
   Published image: ghcr.io/tomasvrba/vibecda-dev:f7779fb13b3c3910a7f9a189bc011b7085d9b68f
   The default devcontainer now references this prepared image. A local-build
   configuration is also available for Apple Silicon and image rebuilds.
-- Native Chrome passed Cloudflare and Tom completed GitHub OAuth into itch.io.
-  Authenticated host account: tmsvr. Freeplay creation was rejected because itch.io
-  requires email verification before hosting a jam. The filled form is preserved;
-  neither track jam has been created yet. Tom has been asked to verify the email.
+- Tom completed itch.io login and email verification. Host account: tmsvr.
+- Published Freeplay: https://itch.io/jam/vibecda-2026-freeplay (jam ID 422198).
+- Published Wizards and Lizards:
+  https://itch.io/jam/vibecda-2026-wizards-and-lizards (jam ID 422199).
+  Both have five voted criteria, no primary-criterion override, judges-only voting,
+  no rating queue, new uploads locked during judging, and results hidden.
+  Saved UTC dates were checked against the confirmed Pacific schedule.
+  The jams are unlisted in the global calendar and accessible by direct link;
+  anonymous access to Freeplay was verified. Judges will be added when Tom supplies
+  their usernames. Reusable public jam copy is archived under organizer/jams/.
 - Editable SVG and 630 × 500 PNG track covers are prepared in organizer/assets/.
-- Two track jams and Sunday 5:30pm judging end confirmed by Tom. Jam configuration
-  and descriptions are ready in itch-setup.md. A printable audience ballot is
+- Two track jams and Sunday 5:30pm judging end confirmed by Tom. A printable audience ballot is
   prepared in audience-ballot.html; per-track audience awards need confirmation.
 - Tom does not manage the existing website. Prepared site-change-request.md for
-  Tom to pass to the webmaster. The participant guide will be hosted on GitHub
+  Tom to pass to the webmaster. The participant guide is hosted on GitHub
   Pages at https://tomasvrba.github.io/vibecda-starter/. Deployment succeeded and
-  the public page returns HTTP 200. It remains visibly labeled as a draft until
-  the itch.io jams are configured.
+  the public page returns HTTP 200. Both jam links are configured and event:check
+  passes. Website rubric changes still need the webmaster.
 
 ## Pending live setup / human input
 
-- Complete itch.io email verification; login is already working in native Chrome.
-- Create the two track jams with their respective equal-weight criteria.
 - Tom forwards site-change-request.md to the webmaster to add guide links and
   update the displayed rubric weights.
-- Add judge accounts, prepare the audience-choice ballot, and test a real submission.
+- Add judge accounts (Tom will supply usernames later), confirm audience-choice
+  policy, and rehearse a jam entry and rating with a real judge account.
 - Test a participant-owned Codespace and AI login using that person's own account.
 
 ## Undo

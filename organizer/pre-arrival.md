@@ -9,6 +9,8 @@ venue updates at https://vibecda.com. Building starts at 6pm Friday; code freeze
 and submissions are due at noon Sunday. Awards are at 6pm Sunday. All times are
 Pacific. Check the site for Sunday's venue confirmation.
 
+Participant guide: https://tomasvrba.github.io/vibecda-starter/
+
 Before you arrive:
 
 1. Create GitHub and itch.io accounts, and have your chosen AI account ready.
@@ -25,9 +27,15 @@ Before the deadline, publish your itch.io project AND submit it to the appropria
 jam. The participant guide explains both steps. Include controls, credits, AI-use
 disclosure, and a working build. Native games are welcome; identify their platform.
 
+Freeplay: https://itch.io/jam/vibecda-2026-freeplay
+Wizards and Lizards: https://itch.io/jam/vibecda-2026-wizards-and-lizards
+Each track has five equally weighted judging criteria. Judging closes at 5:30pm
+Sunday, before the 6pm awards.
+
 Need help? Use the community link in the participant guide or ask a mentor at the
 venue. We recommend getting your first build working before Friday evening.
 
 See you there!
 
-Organizer note: add final hub/jam/community URLs and verify all rules before sending.
+Organizer note: confirm website rubric updates, judge access, and venue details
+before sending. This message has not been sent.

@@ -60,7 +60,8 @@ test('community track is excluded from ranking', () => {
 });
 test('launch guard rejects draft event settings and missing destinations', () => {
   validateEvent(event);
-  assert.throws(() => validateEvent(event, { launch: true }));
+  assert.throws(() => validateEvent({ ...event, status: 'draft' }, { launch: true }));
+  assert.throws(() => validateEvent({ ...event, status: 'ready', links: { ...event.links, jam: '' } }, { launch: true }), /links.jam/);
   assert.throws(() => validateEvent({ ...event, links: { home: 'javascript:alert(1)' } }), /HTTPS/);
   assert.throws(() => validateEvent({ ...event, submissionDeadline: event.startsAt }), /chronological/);
 });

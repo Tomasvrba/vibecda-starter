@@ -53,6 +53,10 @@ Codespace against the same team repository; coordinate branches and merges.
 
 ## Publish a browser game to itch.io
 
+Choose your track: [Freeplay](https://itch.io/jam/vibecda-2026-freeplay) or
+[Wizards and Lizards](https://itch.io/jam/vibecda-2026-wizards-and-lizards).
+Submit by Sunday November 15, 2026 at noon Pacific. GTA Cda is unjudged.
+
 1. Run `npm run package`. Download `artifacts/game.zip` from the editor.
 2. Create a project in your itch.io dashboard. Set its type to HTML, add the ZIP,
    and mark the uploaded file as played in the browser.

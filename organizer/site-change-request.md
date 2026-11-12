@@ -7,8 +7,7 @@ schedule, venues, and sponsor sections can stay in place.
 1. Add a prominent **Participant guide / Start building** button linking to:
    https://tomasvrba.github.io/vibecda-starter/
    This guide links to registration, the prepared environment, community help,
-   and the two track jams. The guide is currently labeled a draft while jam
-   setup is completed; wait for Tom's launch confirmation before promoting it.
+   and the two published track jams.
 2. Update the judging tables to **equal weighting**, as Tom requested:
    - Freeplay: It's playable; Fun factor; Learning and growth; Idea and personality;
      Demo — **20% each**.
@@ -16,8 +15,9 @@ schedule, venues, and sponsor sections can stay in place.
      Halloween theme fit; Art, sound, and atmosphere; Fun and replay — **20% each**.
    - Keep the existing 1–5 descriptions and tie-break policies. GTA Cda stays unjudged.
 3. In submission instructions, tell participants to upload their itch.io project
-   **and then submit it to their track's jam**. There will be two separate jams;
-   their final links will be in the participant guide once created.
+   **and then submit it to their track's jam**:
+   - Freeplay: https://itch.io/jam/vibecda-2026-freeplay
+   - Wizards and Lizards: https://itch.io/jam/vibecda-2026-wizards-and-lizards
 4. Add **Judging closes Sunday November 15 at 5:30pm Pacific**. Code freeze and
    the submission deadline remain **noon Sunday**; awards remain **6pm Sunday**.
 5. Link community/help to:
