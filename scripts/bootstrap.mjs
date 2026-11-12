@@ -9,7 +9,7 @@ try {
     (await readFile('/opt/vibecda/starter/package-lock.json', 'utf8'));
 } catch { /* Local container variations can use npm ci below. */ }
 if (matches) {
-  await cp('/opt/vibecda/starter/node_modules', 'node_modules', { recursive: true });
+  await cp('/opt/vibecda/starter/node_modules', 'node_modules', { recursive: true, verbatimSymlinks: true });
   console.log('Restored the preinstalled starter dependencies.');
 } else {
   const result = spawnSync('npm', ['ci', '--prefer-offline', '--no-audit', '--no-fund'], { stdio: 'inherit' });
