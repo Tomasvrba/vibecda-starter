@@ -25,7 +25,7 @@
 Edit organizer/event.json with the final URLs and settings. Dates, tracks, team
 size, and eligibility come from vibecda.com; Tom explicitly changed scoring to
 equal weight. Update the site's displayed weights before inviting participants.
-The proposal to close judging at 5:30pm is separate from the noon code freeze.
+The confirmed 5:30pm judging end is separate from the noon code freeze.
 
 The `jam` link can point to a track-selector on the event site when using two
 jams. Supply direct track jam links there. `results` can initially point to the
@@ -72,7 +72,7 @@ check judge identities, conflicts, eligibility, or audience ballots.
 ## Human checks before launch
 
 - Complete itch.io login and any security verification, confirm the owning account.
-- Confirm one-versus-two jam choice and judging end time; add real judge accounts.
+- Create the two confirmed track jams and add real judge accounts.
 - Identify the existing site's repository/hosting and back it up before changing it.
 - Match the public rules to Tom's equal-weight judging instruction.
 - Agree on audience-choice ballot and any unresolved rules (existing code, ties,

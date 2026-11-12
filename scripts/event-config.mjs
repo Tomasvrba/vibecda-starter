@@ -26,6 +26,7 @@ export function validateEvent(event, { launch = false } = {}) {
   for (const track of event.tracks) {
     if (!track.id || trackIds.has(track.id)) throw new Error('Track IDs must be unique');
     trackIds.add(track.id);
+    if (track.jamUrl && new URL(track.jamUrl).protocol !== 'https:') throw new Error(`Use an HTTPS jam URL for ${track.id}`);
     if (!track.judged) continue;
     const ids = new Set(track.criteria.map(c => c.id));
     if (ids.size !== track.criteria.length || !ids.size) throw new Error(`Invalid criteria for ${track.id}`);
@@ -37,6 +38,9 @@ export function validateEvent(event, { launch = false } = {}) {
     if (!event.confirmed || event.status !== 'ready') throw new Error('Organizer must confirm event settings and set status to ready');
     for (const name of ['home', 'registration', 'jam', 'starterRepository', 'codespaces', 'community']) {
       if (!event.links[name]) throw new Error(`Launch needs links.${name}`);
+    }
+    for (const track of event.tracks.filter(t => t.judged)) {
+      if (!track.jamUrl) throw new Error(`Launch needs the ${track.name} jam URL`);
     }
   }
 }

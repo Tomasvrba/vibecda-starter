@@ -2,7 +2,7 @@
   "id": "2026-11-vibecda",
   "name": "vibeCDA 2026",
   "status": "draft",
-  "confirmed": false,
+  "confirmed": true,
   "description": "Build a game with AI in a weekend. Beginners welcome.",
   "timezone": "America/Los_Angeles",
   "startsAt": "2026-11-13T18:00:00-08:00",
@@ -18,7 +18,7 @@
     "registration": "https://forms.gle/Ez2JdeezEpTVh7Ua8",
     "jam": "",
     "starterRepository": "https://github.com/Tomasvrba/vibecda-starter",
-    "codespaces": "https://github.com/codespaces/new?template_repository=Tomasvrba%2Fvibecda-starter",
+    "codespaces": "https://codespaces.new/Tomasvrba/vibecda-starter?quickstart=1",
     "community": "https://github.com/Tomasvrba/vibecda-starter/discussions",
     "audienceVote": "",
     "results": ""

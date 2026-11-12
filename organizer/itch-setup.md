@@ -9,14 +9,13 @@ currently shows weighted criteria and must be updated to match before launch.
 - Host account: confirm the signed-in itch.io account with Tom.
 - Starts: Friday November 13, 2026, 6pm America/Los_Angeles (UTC−08:00).
 - Submission deadline: Sunday November 15, 2026, noon, same timezone.
-- Judging end: proposed Sunday 5:30pm, ahead of 6pm awards; confirm with organizer.
+- Judging end: Sunday 5:30pm, ahead of 6pm awards; confirmed by Tom.
 - Ranked jam, judges-only voting, lock file uploads during the rating period.
 - Hide results until the host is ready to announce them.
 - Keep supported platforms broad; browser builds are optional, native games welcome.
 - Add judges and host/admin collaborators by their itch.io accounts.
-- Use one jam per judged track if retaining distinct criteria with native scoring.
-  A single jam can instead use one shared rubric or manual per-track rankings.
-  Confirm this choice before creating live jams. GTA Cda remains unjudged.
+- Create two track jams, confirmed by Tom: Freeplay and Wizards and Lizards.
+  Each retains its own five criteria, equally weighted. GTA Cda remains unjudged.
 
 ## Ready-to-paste description
 

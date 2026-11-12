@@ -29,10 +29,10 @@ ${link('starterRepository', 'Starter & instructions', 'Read the participant guid
 ${link('results', 'Projects & results', 'Explore what the community built this weekend.')}
 </div>
 <h2>Before you arrive</h2><ol><li>Create GitHub and itch.io accounts and choose your AI tool.</li><li>Open the starter, publish it to a team repository, and run <code>npm run dev</code>.</li><li>Check your game opens and your AI login works. Check remaining cloud/AI allowances.</li><li>Bring your charger. Native-engine users should install their editor on their own laptop.</li></ol>
-<h2>Pick a track</h2><div class="grid">${event.tracks.map(t => `<article class="card"><strong>${esc(t.name)}</strong><p>${esc(t.description)}</p></article>`).join('')}</div>
+<h2 id="tracks">Pick a track</h2><div class="grid">${event.tracks.map(t => `<article class="card"><strong>${esc(t.name)}</strong><p>${esc(t.description)}</p>${t.judged ? `<p>${t.criteria.map(c => esc(c.name)).join(' · ')}. Each criterion has equal weight.</p>${t.jamUrl ? `<a href="${esc(t.jamUrl)}">Join / submit to ${esc(t.name)} ↗</a>` : '<p>Jam link coming soon.</p>'}` : ''}</article>`).join('')}</div>
 <h2>Submit your project</h2><ol><li>Save, commit, and push your final code. Record the submitted commit.</li><li>Run <code>npm run package</code> for the web starter and download <code>artifacts/game.zip</code>.</li><li>Create an itch.io project, upload the build, and test it as a visitor. Native games upload the appropriate platform build.</li><li>Use <strong>Submit your project</strong> on the jam page and complete the submission fields. Uploading alone does not enter the jam.</li></ol>
 <p>Your Codespaces preview is temporary; use the submitted build or a durable hosted demo for judging.</p>
-<h2>Judging</h2><p>Freeplay and Wizards and Lizards each have five criteria scored 1–5 with equal weight. GTA Cda is a community build and is not judged. The ${event.links.home ? `<a href="${esc(event.links.home)}#judging">event rules and rubrics</a>` : 'event rules and rubrics'} should reflect these settings before launch.</p>
+<h2>Judging</h2><p>Freeplay and Wizards and Lizards each have five criteria scored 1–5 with equal weight. GTA Cda is a community build and is not judged.</p>
 <p>Awards: ${esc(date('awardsAt'))}. ${esc(event.sundayVenue)}</p>
 <footer><a href="${esc(event.links.home)}">Back to vibeCDA</a><p>Keep your project, credits, and source links available after the event.</p></footer>
 </main></body></html>`;
