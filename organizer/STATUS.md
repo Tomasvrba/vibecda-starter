@@ -8,7 +8,8 @@ each verified milestone. Do not treat prepared files as configured live services
 - Phaser/Vite/TypeScript starter with a playable original game.
 - Build and itch.io ZIP packaging; production build passes.
 - Chromium tests for keyboard movement, collecting, restart, and pointer controls
-  at phone dimensions pass on this machine.
+  at phone dimensions pass on this machine. A third browser test verifies the
+  packaged ZIP under a nested path inside an iframe; all three pass in GitHub CI.
 - Devcontainer image built and tested offline. All tools run; a fresh workspace
   passes eight infrastructure tests, build/ZIP packaging, and two browser tests.
 - Participant guide, agent instructions, draft pre-arrival message, itch.io settings,
@@ -17,8 +18,11 @@ each verified milestone. Do not treat prepared files as configured live services
   overriding the site's current weights; configuration updated accordingly.
 - Published https://github.com/Tomasvrba/vibecda-starter as a public template.
   Discussions enabled. GitHub's Check starter workflow passes.
-- Environment image publishing workflow running:
+- Environment image publishing workflow completed successfully:
   https://github.com/Tomasvrba/vibecda-starter/actions/runs/43301359170
+  Published image: ghcr.io/tomasvrba/vibecda-dev:f7779fb13b3c3910a7f9a189bc011b7085d9b68f
+  The default devcontainer now references this prepared image. A local-build
+  configuration is also available for Apple Silicon and image rebuilds.
 - Native Chrome reached itch.io login after passing Cloudflare. GitHub OAuth login
   needs Tom to sign into GitHub in that native Chrome session.
 - Two track jams and Sunday 5:30pm judging end confirmed by Tom. Jam configuration
@@ -26,11 +30,12 @@ each verified milestone. Do not treat prepared files as configured live services
   prepared in audience-ballot.html; per-track audience awards need confirmation.
 - Tom does not manage the existing website. Prepared site-change-request.md for
   Tom to pass to the webmaster. The participant guide will be hosted on GitHub
-  Pages; its workflow and page publication are being configured.
+  Pages at https://tomasvrba.github.io/vibecda-starter/. Deployment succeeded and
+  the public page returns HTTP 200. It remains visibly labeled as a draft until
+  the itch.io jams are configured.
 
 ## Pending live setup / human input
 
-- Publish the environment image, make it public, and reference it from devcontainer.
 - Complete native-browser GitHub sign-in for itch.io and confirm the itch.io account.
 - Create the two track jams with their respective equal-weight criteria.
 - Tom forwards site-change-request.md to the webmaster to add guide links and

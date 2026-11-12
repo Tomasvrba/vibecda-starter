@@ -38,8 +38,10 @@ npm run dev
 ```
 
 Open http://localhost:5173. You can also use VS Code's **Reopen in Container**
-with Docker installed. The Node-only route doesn't install the optional AI CLIs
-or asset utilities on your computer.
+with Docker installed. The default image targets Codespaces/Linux x64. On Apple
+Silicon, select the **local build** configuration to build for your machine.
+The Node-only route doesn't install the optional AI CLIs or asset utilities on
+your computer.
 
 ## Submit
 

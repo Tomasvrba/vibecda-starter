@@ -33,7 +33,7 @@ ${link('results', 'Projects & results', 'Explore what the community built this w
 <h2>Submit your project</h2><ol><li>Save, commit, and push your final code. Record the submitted commit.</li><li>Run <code>npm run package</code> for the web starter and download <code>artifacts/game.zip</code>.</li><li>Create an itch.io project, upload the build, and test it as a visitor. Native games upload the appropriate platform build.</li><li>Use <strong>Submit your project</strong> on the jam page and complete the submission fields. Uploading alone does not enter the jam.</li></ol>
 <p>Your Codespaces preview is temporary; use the submitted build or a durable hosted demo for judging.</p>
 <h2>Judging</h2><p>Freeplay and Wizards and Lizards each have five criteria scored 1–5 with equal weight. GTA Cda is a community build and is not judged.</p>
-<p>Awards: ${esc(date('awardsAt'))}. ${esc(event.sundayVenue)}</p>
+<p>Judging closes: ${esc(date('judgingEndsAt'))}. Awards: ${esc(date('awardsAt'))}. ${esc(event.sundayVenue)}</p>
 <footer><a href="${esc(event.links.home)}">Back to vibeCDA</a><p>Keep your project, credits, and source links available after the event.</p></footer>
 </main></body></html>`;
 await mkdir('dist-hub', { recursive: true });

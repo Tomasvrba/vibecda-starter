@@ -1,0 +1,9 @@
+{
+  "name": "vibeCDA · local build (including Apple Silicon)",
+  "build": { "dockerfile": "../Dockerfile", "context": "../.." },
+  "remoteUser": "node",
+  "forwardPorts": [5173],
+  "portsAttributes": { "5173": { "label": "Your game", "onAutoForward": "openBrowser" } },
+  "onCreateCommand": "node scripts/bootstrap.mjs",
+  "postAttachCommand": "cat docs/welcome.txt"
+}

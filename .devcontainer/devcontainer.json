@@ -1,10 +1,15 @@
 {
   "name": "vibeCDA · game studio",
-  "build": { "dockerfile": "Dockerfile", "context": ".." },
   "remoteUser": "node",
-  "forwardPorts": [5173],
+  "forwardPorts": [
+    5173
+  ],
   "portsAttributes": {
-    "5173": { "label": "Your game", "onAutoForward": "openBrowser", "visibility": "private" }
+    "5173": {
+      "label": "Your game",
+      "onAutoForward": "openBrowser",
+      "visibility": "private"
+    }
   },
   "onCreateCommand": "node scripts/bootstrap.mjs",
   "postAttachCommand": "cat docs/welcome.txt",
@@ -16,5 +21,6 @@
         "files.autoSave": "afterDelay"
       }
     }
-  }
+  },
+  "image": "ghcr.io/tomasvrba/vibecda-dev:f7779fb13b3c3910a7f9a189bc011b7085d9b68f"
 }
