@@ -14,6 +14,8 @@ venue updates, and registration. This starter is optional; native games are welc
 Judging closes Sunday at 5:30pm Pacific. Each track uses its own five criteria,
 weighted equally at 20% each.
 
+[Play the starter demo](https://tmsvr.itch.io/vibecda-starter-demo).
+
 ## Start in Codespaces
 
 On this repository, select **Use this template → Open in a codespace**.

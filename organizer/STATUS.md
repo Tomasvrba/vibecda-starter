@@ -31,16 +31,23 @@ each verified milestone. Do not treat prepared files as configured live services
   no rating queue, new uploads locked during judging, and results hidden.
   Saved UTC dates were checked against the confirmed Pacific schedule.
   The jams are unlisted in the global calendar and accessible by direct link;
-  anonymous access to Freeplay was verified. Judges will be added when Tom supplies
+  anonymous access to both jams was verified. Judges will be added when Tom supplies
   their usernames. Reusable public jam copy is archived under organizer/jams/.
-- Editable SVG and 630 × 500 PNG track covers are prepared in organizer/assets/.
+- Editable SVG and 630 × 500 PNG covers are saved in organizer/assets/. Both
+  track covers are attached to the live jams and their saved thumbnails verified.
+- Uploaded and published the starter as a separate free, unlisted HTML demo:
+  https://tmsvr.itch.io/vibecda-starter-demo (project ID 5349310).
+  Its actual itch.io iframe was tested in an anonymous browser: renders, collects
+  a spark using keyboard controls, and restarts, with no page errors. This demo is
+  clearly labeled as a rehearsal and has not been entered in either competition.
 - Two track jams and Sunday 5:30pm judging end confirmed by Tom. A printable audience ballot is
   prepared in audience-ballot.html; per-track audience awards need confirmation.
 - Tom does not manage the existing website. Prepared site-change-request.md for
   Tom to pass to the webmaster. The participant guide is hosted on GitHub
   Pages at https://tomasvrba.github.io/vibecda-starter/. Deployment succeeded and
   the public page returns HTTP 200. Both jam links are configured and event:check
-  passes. Website rubric changes still need the webmaster.
+  passes. The updated guide is deployed without a draft banner, both jam links
+  are visible, and GitHub CI passes. Website rubric changes still need the webmaster.
 
 ## Pending live setup / human input
 
@@ -52,7 +59,9 @@ each verified milestone. Do not treat prepared files as configured live services
 
 ## Undo
 
-Changes are additive in this repository. Once published, archive the new template
-repo and remove the added participant hub/page links to retire the setup. Keep
-participant projects and credentials. Docker image/cache and temporary Chromium
+Changes are additive in this repository. Archive the new template repo and remove
+the added participant hub/page links to retire the setup. Unpublish the two event
+jams and switch the starter demo to Draft to withdraw these new itch.io pages
+without deleting their data. Keep participant projects and credentials.
+Docker image/cache and temporary Chromium
 downloads can be removed selectively after testing.
