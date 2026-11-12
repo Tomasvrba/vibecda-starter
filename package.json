@@ -1,0 +1,27 @@
+{
+  "name": "vibecda-starter",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.12" },
+  "scripts": {
+    "dev": "vite --host 0.0.0.0 --port 5173 --strictPort",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --host 0.0.0.0 --port 4173 --strictPort",
+    "package": "npm run build && node scripts/package-game.mjs",
+    "doctor": "node scripts/doctor.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:browser": "playwright test",
+    "hub:build": "node scripts/build-hub.mjs",
+    "event:check": "node scripts/check-event.mjs",
+    "check": "npm test && npm run build && npm run hub:build",
+    "judging": "node scripts/score.mjs"
+  },
+  "dependencies": { "phaser": "3.90.0" },
+  "devDependencies": {
+    "@playwright/test": "1.65.0",
+    "fflate": "0.8.2",
+    "typescript": "5.9.3",
+    "vite": "7.3.8"
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "id": "2026-11-vibecda",
+  "name": "vibeCDA 2026",
+  "status": "draft",
+  "confirmed": false,
+  "description": "Build a game with AI in a weekend. Beginners welcome.",
+  "timezone": "America/Los_Angeles",
+  "startsAt": "2026-11-13T18:00:00-08:00",
+  "submissionDeadline": "2026-11-15T12:00:00-08:00",
+  "judgingEndsAt": "2026-11-15T17:30:00-08:00",
+  "awardsAt": "2026-11-15T18:00:00-08:00",
+  "scheduleNote": "Dates, tracks, and criteria from vibecda.com, as directed by Tom. Equal-weight judging and two track jams explicitly requested by Tom on 2026-11-12; this changes the site's published weights. Tom confirmed judging ends at 5:30pm before 6pm awards.",
+  "venue": "Innovation Collective, 418 E Lakeside Ave, Suite 9, Coeur d'Alene, ID",
+  "sundayVenue": "Cda Immersive Studio — to be confirmed",
+  "maxTeamSize": 5,
+  "links": {
+    "home": "https://vibecda.com",
+    "registration": "https://forms.gle/Ez2JdeezEpTVh7Ua8",
+    "jam": "",
+    "starterRepository": "https://github.com/Tomasvrba/vibecda-starter",
+    "codespaces": "https://github.com/codespaces/new?template_repository=Tomasvrba%2Fvibecda-starter",
+    "community": "https://github.com/Tomasvrba/vibecda-starter/discussions",
+    "audienceVote": "",
+    "results": ""
+  },
+  "tracks": [
+    {
+      "id": "freeplay",
+      "name": "Freeplay",
+      "jamUrl": "",
+      "judged": true,
+      "description": "Build any game you want. Playability, learning, and fun come first.",
+      "criteria": [
+        { "id": "playable", "name": "It's playable", "weight": 20 },
+        { "id": "fun", "name": "Fun factor", "weight": 20 },
+        { "id": "learning", "name": "Learning and growth", "weight": 20 },
+        { "id": "personality", "name": "Idea and personality", "weight": 20 },
+        { "id": "demo", "name": "Demo", "weight": 20 }
+      ],
+      "tieBreakers": ["learning"]
+    },
+    {
+      "id": "wizards-and-lizards",
+      "name": "Wizards and Lizards",
+      "jamUrl": "",
+      "judged": true,
+      "description": "A Halloween-themed track for creativity and quality execution.",
+      "criteria": [
+        { "id": "creativity", "name": "Creativity and originality", "weight": 20 },
+        { "id": "execution", "name": "Quality of execution", "weight": 20 },
+        { "id": "theme", "name": "Halloween theme fit", "weight": 20 },
+        { "id": "atmosphere", "name": "Art, sound, and atmosphere", "weight": 20 },
+        { "id": "replay", "name": "Fun and replay", "weight": 20 }
+      ],
+      "tieBreakers": ["creativity", "execution"]
+    },
+    {
+      "id": "gta-cda",
+      "name": "GTA Cda",
+      "jamUrl": "",
+      "judged": false,
+      "description": "Shared community game. Coordinate contributions with the project maintainer. Not judged.",
+      "criteria": [],
+      "tieBreakers": []
+    }
+  ]
+}

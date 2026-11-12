@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#10231f" />
+    <title>Lake Loop · vibeCDA starter</title>
+  </head>
+  <body>
+    <main>
+      <header>
+        <span class="eyebrow">vibeCDA / make it yours</span>
+        <h1>Lake Loop</h1>
+        <p>A tiny treasure hunt by the lake. Collect all eight sparks.</p>
+      </header>
+      <div class="toolbar">
+        <p id="score" role="status" aria-live="polite">Sparks: 0 / 8</p>
+        <button id="restart" type="button">Restart game</button>
+      </div>
+      <div id="game" role="application" aria-label="Lake Loop game. Move using arrow keys or W A S D, or hold a location on the game."></div>
+      <p id="instructions">Move with <kbd>↑</kbd> <kbd>↓</kbd> <kbd>←</kbd> <kbd>→</kbd> or WASD. On a phone, hold where you want to go.</p>
+      <footer>Start changing <code>src/game.ts</code>. Your idea goes here.</footer>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

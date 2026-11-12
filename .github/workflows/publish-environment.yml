@@ -1,0 +1,36 @@
+name: Publish development environment
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  packages: write
+jobs:
+  image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - name: Choose image name
+        id: image
+        shell: bash
+        run: |
+          echo "name=ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/vibecda-dev" >> "$GITHUB_OUTPUT"
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: .devcontainer/Dockerfile
+          push: true
+          tags: |
+            ${{ steps.image.outputs.name }}:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - name: Next step
+        run: |
+          echo 'Make this GHCR package public, then set the devcontainer image to:' >> "$GITHUB_STEP_SUMMARY"
+          echo '${{ steps.image.outputs.name }}:${{ github.sha }}' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Use node scripts/use-prebuilt.mjs IMAGE to update the configuration.' >> "$GITHUB_STEP_SUMMARY"

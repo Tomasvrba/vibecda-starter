@@ -1,0 +1,14 @@
+
+Welcome to vibeCDA!
+
+1. Publish this workspace to your team's GitHub repository now.
+2. Run: npm run dev
+3. Open port 5173 in the Ports tab to play your game.
+4. Pick one AI tool: claude / codex login --device-auth / gemini
+   Use your own account. See docs/participants.md for remote-login help.
+5. Edit src/game.ts. Build a submission: npm run package
+
+Your ZIP: artifacts/game.zip
+Upload it to your itch.io project, then submit the project to the jam.
+Save, commit, and push frequently. The preview URL is temporary.
+
