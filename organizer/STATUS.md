@@ -24,14 +24,17 @@ each verified milestone. Do not treat prepared files as configured live services
 - Two track jams and Sunday 5:30pm judging end confirmed by Tom. Jam configuration
   and descriptions are ready in itch-setup.md. A printable audience ballot is
   prepared in audience-ballot.html; per-track audience awards need confirmation.
-- Website repository not found yet; source/hosting location requested.
+- Tom does not manage the existing website. Prepared site-change-request.md for
+  Tom to pass to the webmaster. The participant guide will be hosted on GitHub
+  Pages; its workflow and page publication are being configured.
 
 ## Pending live setup / human input
 
 - Publish the environment image, make it public, and reference it from devcontainer.
 - Complete native-browser GitHub sign-in for itch.io and confirm the itch.io account.
 - Create the two track jams with their respective equal-weight criteria.
-- Identify site source/hosting so links and equal-weight rubrics can be updated.
+- Tom forwards site-change-request.md to the webmaster to add guide links and
+  update the displayed rubric weights.
 - Add judge accounts, prepare the audience-choice ballot, and test a real submission.
 - Test a participant-owned Codespace and AI login using that person's own account.
 

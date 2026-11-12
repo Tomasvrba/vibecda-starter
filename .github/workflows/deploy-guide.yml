@@ -1,0 +1,35 @@
+name: Deploy participant guide
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - organizer/event.json
+      - scripts/build-hub.mjs
+      - scripts/event-config.mjs
+      - .github/workflows/deploy-guide.yml
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: participant-guide
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/build-hub.mjs
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist-hub
+      - uses: actions/deploy-pages@v4
+        id: deployment
