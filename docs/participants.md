@@ -49,7 +49,9 @@ model access must be tested with your account; the build only verifies tools run
 ## Build your game
 
 - `src/game.ts`: the game scene and mechanics.
-- `src/main.ts`: Phaser configuration.
+- `src/three-game.ts`: working Three.js 3D example; click **Three.js 3D demo**
+  above the game and follow [the 3D walkthrough](threejs.md).
+- `src/main.ts`: chooses the demo; `src/phaser-game.ts`: Phaser configuration.
 - `src/style.css` and `index.html`: the page surrounding your game.
 - `public/`: images, sounds, and other files copied into the build. Use
   `import.meta.env.BASE_URL` for assets loaded by code when needed; avoid root-only

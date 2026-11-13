@@ -5,10 +5,11 @@ New here? Open docs/beginners.md for the step-by-step walkthrough and FAQ.
 
 1. Publish this workspace to your team's GitHub repository now.
 2. Run: npm run dev
-3. Open port 5173 in the Ports tab to play your game.
+3. Open port 5173 in the Ports tab. Try Phaser 2D or click Three.js 3D demo.
 4. Pick one AI tool: claude / codex login --device-auth / gemini
    Use your own account. See docs/participants.md for remote-login help.
-5. Edit src/game.ts. Build a submission: npm run package
+5. Edit src/game.ts (2D) or src/three-game.ts (3D). See docs/threejs.md.
+   Build a submission: npm run package
 
 Your ZIP: artifacts/game.zip
 Upload it to your itch.io project, then submit the project to the jam.

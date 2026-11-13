@@ -1,7 +1,7 @@
 # vibeCDA game starter
 
-A small Phaser 3 + Vite + TypeScript game, with a prepared Codespaces environment
-and a direct route to an itch.io submission. Use your own AI account; the game
+A Phaser 2D game and Three.js 3D example, using Vite and TypeScript, with a prepared
+Codespaces environment and a direct route to an itch.io submission. Use your own AI account; the game
 itself needs no API key, backend, or paid service.
 
 **Event:** [vibecda.com](https://vibecda.com) · November 13–15, 2026 · Pacific time.
@@ -35,12 +35,20 @@ npm run dev
 Open **port 5173** in the Ports tab. Move with arrow keys, WASD, or by holding a
 point on the game. Change `src/game.ts` to make it yours.
 
+Click **Three.js 3D demo** at the top of the page to try the included 3D scene.
+Drag to orbit, scroll/pinch to zoom, and use Pause/Reset. Edit `src/three-game.ts`
+to make it yours; follow the [3D walkthrough](docs/threejs.md) for your first changes.
+
 The prepared container includes Claude Code, Codex, Gemini CLI, Chromium with
 Playwright, ffmpeg, ImageMagick, zip, and ripgrep. Pick one AI tool and log into
 your own account; see [participant instructions](docs/participants.md).
 
 See [installed tools and game resources](docs/tools.md) and
 [connect VS Code, SSH editors, or T3 Code](docs/editors.md).
+
+**The default Codespace includes Phaser, Three.js, and Three.js TypeScript types.**
+Both examples use the same Vite preview and itch.io ZIP workflow. Only the
+selected example's engine loads in the browser.
 
 ## Run locally
 

@@ -1,18 +1,18 @@
 # Installed tools and game resources
 
-The prepared Codespace is a Linux environment for **Phaser browser games**.
+The prepared Codespace is a Linux environment for **Phaser 2D or Three.js 3D browser games**.
 Your game renders on your laptop's browser; the cloud workspace runs the code,
 build, AI tools, and tests. AI tools require your own eligible account and login.
 
 ## What is included
 
-These versions were checked in the prepared image on November 12, 2026. Base
-system versions can change when rebuilding the Dockerfile.
+The base tools below were checked on November 12, 2026; Three.js was added on
+November 13. Base system versions can change when rebuilding the Dockerfile.
 
 | Area | Included |
 | --- | --- |
 | Runtime | Node.js 22.16.0, npm 10.9.2, Python 3.11.2 |
-| Game and web build | Phaser 3.90.0, Vite 7.3.8, TypeScript 5.9.3 |
+| Game and web build | Phaser 3.90.0, Three.js 0.187.0 with matching TypeScript types, Vite 7.3.8, TypeScript 5.9.3 |
 | AI terminals | Claude Code 2.1.322, Codex 0.167.2, Gemini CLI 0.68.0 |
 | Browser testing | Playwright 1.65.0 and its Chromium browser |
 | Asset processing | ffmpeg, ImageMagick (`convert`) |
@@ -20,7 +20,7 @@ system versions can change when rebuilding the Dockerfile.
 | Submission | `npm run package` builds `artifacts/game.zip` for itch.io |
 | External editor access | Official SSH server devcontainer feature; installed during container creation |
 
-The Phaser/build/test dependencies are cached in the image and restored when the
+The game/build/test dependencies are cached in the image and restored when the
 workspace is created. The SSH feature adds a small separate setup step. The
 container also configures login shells so external tools can find the AI CLIs.
 Existing Codespaces need **Codespaces: Rebuild Container** after pulling the new
@@ -59,9 +59,13 @@ game; follow the examples in the starter and avoid paths starting with `/`.
 Record the creator, source URL, license, and any required attribution in
 `public/ASSETS.md`. Commit the assets with the game.
 
-For this small event, keep Phaser as the supported default and use these optional
-resources as needed. An engine change also changes the build/export workflow;
-the starter's ZIP command packages the Vite web build.
+Use the included Phaser or Three.js example as a starting point. Native engine
+projects need their own build/export workflow; the starter's ZIP command
+packages the Vite web build.
+
+For browser-based 3D, [Three.js and a working demo are included by default](threejs.md). They use the
+same Vite and ZIP commands. Rendering uses the player's browser/GPU, so a GPU
+Codespace is not needed. Native desktop engines still need their own setup.
 
 See [editor and T3 Code connections](editors.md) and the
 [participant guide](participants.md).

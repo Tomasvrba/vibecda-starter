@@ -76,7 +76,8 @@ under your account. Do that before substantial work; ask a mentor if unsure.
 7. Open the **Ports** tab beside Terminal. Find **5173**, then choose its
    **Open in Browser** action. An **Open in Browser** notification may also appear.
 8. The starter game opens in another browser tab. Try arrow keys or WASD; on a
-   touch screen, hold a point on the game.
+   touch screen, hold a point on the game. Click **Three.js 3D demo** at the top
+   to try the included 3D scene: drag to orbit and scroll/pinch to zoom.
 
 **You should now see:** the game running. Leave the terminal running while
 developing; **Ctrl+C** in that terminal stops it. A preview address is temporary
@@ -111,7 +112,8 @@ Stopped workspaces still use storage; push/export work before eventually deletin
 | File or folder | What you change there |
 | --- | --- |
 | `src/game.ts` | Gameplay, movement, scoring, and the game scene |
-| `src/main.ts` | Game setup and canvas configuration |
+| `src/three-game.ts` | The working Three.js 3D scene and camera controls |
+| `src/main.ts` / `src/phaser-game.ts` | Demo selection / Phaser setup |
 | `src/style.css` and `index.html` | The web page around the game |
 | `public/` | Pictures, sounds, and other assets; drag files into the editor to upload them |
 | `public/ASSETS.md` | Credits and licenses for assets you use |
@@ -334,6 +336,13 @@ The easiest way for friends and judges to play is usually your finished itch.io 
 and is not judged. Other engines need their own export/build instructions.
 
 ## FAQ and fixes
+
+### Can I make a 3D game instead?
+
+Yes. The default Codespace includes Three.js, its TypeScript types, and a working
+3D example. Click **Three.js 3D demo** at the top of the game page and follow
+[the Three.js walkthrough](threejs.md) to edit it. Codespaces handles development and building; your own browser/GPU
+renders the game. The same packaging and itch.io upload steps apply.
 
 ### Do I need an AI subscription, GitHub organization invitation, or GPU?
 

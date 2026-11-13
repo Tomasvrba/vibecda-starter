@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "engines": { "node": ">=22.12" },
+  "engines": {
+    "node": ">=22.12"
+  },
   "scripts": {
     "dev": "vite --host 0.0.0.0 --port 5173 --strictPort",
     "build": "tsc --noEmit && vite build",
@@ -16,9 +18,13 @@
     "event:check": "node scripts/check-event.mjs",
     "check": "npm test && npm run build && npm run hub:build"
   },
-  "dependencies": { "phaser": "3.90.0" },
+  "dependencies": {
+    "phaser": "3.90.0",
+    "three": "0.187.0"
+  },
   "devDependencies": {
     "@playwright/test": "1.65.0",
+    "@types/three": "0.187.0",
     "fflate": "0.8.2",
     "typescript": "5.9.3",
     "vite": "7.3.8"

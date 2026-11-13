@@ -1,7 +1,9 @@
 # vibeCDA starter instructions
 
-This repository contains a Phaser 3 + Vite + TypeScript browser game and public
-participant guides. Participant game changes belong in src/ and public/.
+This repository contains Phaser 3 and Three.js browser examples using Vite and
+TypeScript, plus public participant guides. Participant game changes belong in
+src/ and public/. The Three.js example is src/three-game.ts; both engines are
+installed in the default Codespace.
 
 - Read package.json before installing anything. The devcontainer already has
   Node, Claude Code, Codex, Gemini CLI, Chromium/Playwright, ffmpeg, ImageMagick,

@@ -36,6 +36,37 @@ test('pointer controls work at phone dimensions', async ({ page }) => {
   await page.mouse.up();
 });
 
+test('Three.js renders in WebGL 2 and its camera, pause, and reset controls work', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await page.goto('/');
+  await page.getByRole('link', { name: 'Three.js 3D demo' }).click();
+  const scene = page.locator('canvas[aria-label="Interactive 3D canvas"]');
+  await expect(scene).toBeVisible();
+  await expect(page.getByRole('status')).toHaveText('3D demo · auto-rotate on');
+  expect(await scene.evaluate(element => {
+    const gl = element.getContext('webgl2');
+    return gl !== null && !gl.isContextLost();
+  })).toBe(true);
+  await page.getByRole('button', { name: 'Pause rotation' }).click();
+  await expect(page.getByRole('status')).toHaveText('3D demo · auto-rotate off');
+  const originalView = (await scene.screenshot()).toString('base64');
+  await scene.focus();
+  await page.keyboard.press('ArrowRight');
+  await expect.poll(async () => (await scene.screenshot()).toString('base64')).not.toBe(originalView);
+  await page.setViewportSize({ width: 390, height: 844 });
+  const phoneView = (await scene.screenshot()).toString('base64');
+  const box = await scene.boundingBox();
+  await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(box.x + box.width * 0.75, box.y + box.height / 2, { steps: 8 });
+  await page.mouse.up();
+  await expect.poll(async () => (await scene.screenshot()).toString('base64')).not.toBe(phoneView);
+  await page.getByRole('button', { name: 'Reset view' }).click();
+  await expect(page.getByRole('status')).toHaveText('3D demo · auto-rotate on');
+  expect(errors).toEqual([]);
+});
+
 test('the actual submission ZIP runs under a subdirectory inside an iframe', async ({ page }) => {
   const dir = await mkdtemp(join(tmpdir(), 'vibecda-iframe-'));
   const { output } = await packageGame('dist', join(dir, 'game.zip'));
@@ -63,6 +94,12 @@ test('the actual submission ZIP runs under a subdirectory inside an iframe', asy
     await page.keyboard.down('ArrowRight');
     await expect(frame.getByRole('status')).toHaveText('Sparks: 1 / 8');
     await page.keyboard.up('ArrowRight');
+    // The same uploaded ZIP also includes the Three.js demo, with relative chunks.
+    await frame.getByRole('link', { name: 'Three.js 3D demo' }).click();
+    await expect(frame.locator('canvas[aria-label="Interactive 3D canvas"]')).toBeVisible();
+    await expect(frame.getByRole('status')).toHaveText('3D demo · auto-rotate on');
+    await frame.getByRole('button', { name: 'Pause rotation' }).click();
+    await expect(frame.getByRole('status')).toHaveText('3D demo · auto-rotate off');
   } finally {
     await page.goto('about:blank');
     await new Promise(resolve => server.close(resolve));
