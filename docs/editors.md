@@ -1,5 +1,8 @@
 # Connect your editor to the Codespace
 
+For a plain-language walkthrough from the beginning, use
+[Your first vibeCDA game](beginners.md#5-use-your-preferred-editor).
+
 The code and terminals stay in the Codespace whichever editor you use. Stop the
 Codespace when finished, and commit/push milestones to your team's repository.
 Each participant uses their own GitHub and AI accounts.
@@ -12,7 +15,7 @@ simplest supported route and needs no local SSH setup.
 
 ## Desktop VS Code
 
-Install desktop VS Code and Microsoft's **GitHub Codespaces** extension. Sign
+Install desktop VS Code and the **GitHub Codespaces** extension published by GitHub. Sign
 into GitHub, open **Remote Explorer → GitHub Codespaces**, and connect to your
 running Codespace. You can also select **Open in VS Code** from the Codespaces
 menu on GitHub. The extension handles the connection.

@@ -1,7 +1,7 @@
 # vibeCDA starter instructions
 
-This repository contains a Phaser 3 + Vite + TypeScript browser game and event
-organizer materials. Participant game changes belong in src/ and public/.
+This repository contains a Phaser 3 + Vite + TypeScript browser game and public
+participant guides. Participant game changes belong in src/ and public/.
 
 - Read package.json before installing anything. The devcontainer already has
   Node, Claude Code, Codex, Gemini CLI, Chromium/Playwright, ffmpeg, ImageMagick,
@@ -16,6 +16,7 @@ organizer materials. Participant game changes belong in src/ and public/.
   VITE_ variables, Git, built assets, or container images.
 - Keep gameplay small and playable. Preserve keyboard and touch controls where
   possible. Record third-party asset licenses and AI usage in credits.
-- Do not change organizer/ rules, scores, or event settings during gameplay work.
+- Do not change event/ rules or event settings during gameplay work. Internal
+  organizer operations and scoring tools live in a separate private repository.
 - Commit and push useful milestones to the team's repository. Before publishing
   or uploading, check the target account and destination with the participant.

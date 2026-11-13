@@ -1,13 +1,18 @@
 # Participant guide
 
+New to this? Follow [the step-by-step beginner guide](beginners.md) for clicking
+through setup, saving work, desktop/T3 connections, local downloads, and itch.io.
+This page is the shorter reference, including AI login details.
+
 ## Before arriving
 
 1. Register at [vibecda.com](https://vibecda.com), create GitHub and itch.io
    accounts, and choose your development environment.
-2. Open this template in Codespaces, or install Node 22.12+ locally and run
+2. Create your own repository with **Use this template → Create a new repository**,
+   then open that repository in Codespaces, or install Node 22.12+ locally and run
    `npm ci`. Native Godot, Unity, Unreal, or other engine users should install
    and test their own editor and export tools before arrival.
-3. Publish a team repository, invite collaborators, and run `npm run dev`.
+3. Invite collaborators to your team repository and run `npm run dev`.
 4. Open the game, change something small, and verify your AI login. Check remaining
    GitHub Codespaces and AI allowances; the event doesn't supply subscriptions.
 

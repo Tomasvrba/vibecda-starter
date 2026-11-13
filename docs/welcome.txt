@@ -1,6 +1,8 @@
 
 Welcome to vibeCDA!
 
+New here? Open docs/beginners.md for the step-by-step walkthrough and FAQ.
+
 1. Publish this workspace to your team's GitHub repository now.
 2. Run: npm run dev
 3. Open port 5173 in the Ports tab to play your game.

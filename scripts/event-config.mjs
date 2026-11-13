@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 
-export async function loadEvent(path = 'organizer/event.json') {
+export async function loadEvent(path = 'event/event.json') {
   const event = JSON.parse(await readFile(path, 'utf8'));
   validateEvent(event);
   return event;

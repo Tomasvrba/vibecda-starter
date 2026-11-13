@@ -10,4 +10,5 @@ test-results/
 .DS_Store
 *.log
 organizer/private/
+.internal/
 

@@ -14,12 +14,17 @@ venue updates, and registration. This starter is optional; native games are welc
 Judging closes Sunday at 5:30pm Pacific. Each track uses its own five criteria,
 weighted equally at 20% each.
 
+**First time using GitHub or Codespaces? [Start with the step-by-step beginner
+guide](docs/beginners.md).** It covers making your own copy, running the game,
+saving work, connecting VS Code/T3 Code, downloading files, and submitting to itch.io.
+
 ## Start in Codespaces
 
-On this repository, select **Use this template → Open in a codespace**.
-Publish the workspace to **your team's new repository** using Source Control →
-Publish Branch before doing substantial work. Invite teammates to that repository.
-An unpublished Codespace is not a durable repository backup.
+On this repository, select **Use this template → Create a new repository**.
+Create it under your own account, then choose **Code → Codespaces → Create
+codespace on main** in that new repository. Invite teammates to your team's
+repository. Follow the [beginner walkthrough](docs/beginners.md#1-create-your-own-copy)
+if you already opened a Codespace directly from the template.
 
 In the terminal:
 
@@ -74,7 +79,7 @@ to `public/ASSETS.md`. Native-engine projects submit their own platform builds.
 | `npm run build` | Type-check and create `dist/` |
 | `npm run package` | Build and create the itch.io ZIP |
 | `npm run doctor` | Check installed development tools |
-| `npm test` | Check scoring, packaging, and event configuration |
+| `npm test` | Check packaging and public event configuration |
 | `npm run test:browser` | Exercise the production game in Chromium |
 | `npm run hub:build` | Generate the participant event hub in `dist-hub/` |
 | `npm run event:check` | Check that event settings and destinations are ready |
@@ -82,16 +87,3 @@ to `public/ASSETS.md`. Native-engine projects submit their own platform builds.
 For browser checks outside the prepared container, first run
 `npx playwright install --with-deps chromium`. Commit and push milestones;
 stopping a Codespace saves compute usage, but its storage can still count.
-
-## Organizers
-
-- [GitHub organization access and migration notes](organizer/GITHUB-ADMIN.md)
-- [Live setup status and remaining human steps](organizer/STATUS.md)
-- [Platform configuration and launch runbook](organizer/RUNBOOK.md)
-- [itch.io copy and settings](organizer/itch-setup.md)
-- [Draft pre-arrival message](organizer/pre-arrival.md)
-- [Event configuration](organizer/event.json) and [archive](organizer/archive/README.md)
-
-The event hub reads from one configuration file. Missing links remain visibly
-unavailable; the draft hub is marked noindex until the event is ready. Public
-platform settings must agree with the event site's rules.

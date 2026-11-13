@@ -14,8 +14,7 @@
     "test:browser": "playwright test",
     "hub:build": "node scripts/build-hub.mjs",
     "event:check": "node scripts/check-event.mjs",
-    "check": "npm test && npm run build && npm run hub:build",
-    "judging": "node scripts/score.mjs"
+    "check": "npm test && npm run build && npm run hub:build"
   },
   "dependencies": { "phaser": "3.90.0" },
   "devDependencies": {
