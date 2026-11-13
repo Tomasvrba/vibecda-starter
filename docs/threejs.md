@@ -10,11 +10,14 @@ starter includes both the Phaser 2D game and the Three.js 3D demo.
 2. In its terminal, run `npm run dev`.
 3. Open **Ports → 5173 → Open in Browser**.
 4. Click **Three.js 3D demo** at the top of the game page. You should see a
-   yellow cube spinning above a green island.
-5. Drag to move the camera around the cube. Scroll or pinch to zoom. Click/tap
+   floating island with a cabin, a lake, and a game controller hovering above
+   it, slowly turning under the stars.
+5. Drag to move the camera around the island. Scroll or pinch to zoom. Click/tap
    the canvas to focus it, then use arrow keys to pan the camera.
-6. Use **Pause rotation** to inspect the scene and **Reset view** to start over.
-   Click **Phaser 2D game** to return to the original treasure hunt.
+6. Use **Pause animation** to freeze the scene, **Smooth look** / **Pixel look**
+   to switch between a smooth picture and chunky pixels, and **Reset view** to
+   start over. Click **Phaser 2D game** to return to the 2D treasure hunt on
+   the same island.
 
 The 3D page has `?demo=3d` at the end of its address. Both examples are included
 in the normal Vite build and game ZIP; you do not need a second server.
@@ -22,13 +25,16 @@ in the normal Vite build and game ZIP; you do not need a second server.
 ## Make your first change
 
 1. Open **src → three-game.ts** in the editor. This is the complete 3D example.
-2. Find `color: '#ffd477'` in the cube's material. Change it to `'#3de0ff'`.
-3. Save. The preview should reload with a cyan cube.
-4. Change `new THREE.BoxGeometry(1.2, 1.2, 1.2)` to
-   `new THREE.BoxGeometry(1.2, 2, 1.2)` to make a taller box. Adjust
-   `cube.position.y` if it overlaps the island.
-5. Near the end, change `delta * 0.7` to `delta * 1.4` to make it spin faster.
-6. Run `npm run build` in a second terminal to check for errors, then commit
+   The island is built only from simple shapes; there are no model files.
+2. Find `solid('#b5442e')` in the cabin's walls. Change it to `solid('#9b7bff')`.
+3. Save. The preview should reload with a purple cabin.
+4. Find the list of tree positions that starts with `[-2.3, -0.9]`. Add
+   `[-0.4, 1.9],` to the list to plant another pine beside the lake.
+5. Near the top, change `const PIXEL_SIZE = 3;` to `6` for chunkier pixels, or
+   to `1` for a smooth picture.
+6. Change `controls.autoRotateSpeed = 0.8;` to `3` to make the camera circle
+   the island faster.
+7. Run `npm run build` in a second terminal to check for errors, then commit
    and push your work as described in the [beginner guide](beginners.md#4-save-a-version-on-github).
 
 | Part of the example | What it does |
@@ -36,12 +42,15 @@ in the normal Vite build and game ZIP; you do not need a second server.
 | `scene` | Holds the objects and background |
 | `camera` | Chooses the viewpoint and perspective |
 | `renderer` | Draws the scene into the browser canvas |
-| `BoxGeometry` / `CylinderGeometry` | Define the shapes |
-| `MeshStandardMaterial` | Defines the surface color and how light affects it |
-| `Mesh` | Combines a shape and a material into a visible object |
-| Hemisphere/directional lights | Make the shapes look three-dimensional |
+| `BoxGeometry` / `CylinderGeometry` / `ConeGeometry` | Define the shapes |
+| `solid()` / `lit()` | Make a `MeshStandardMaterial`: the surface color and how light affects it. `lit()` surfaces glow |
+| `add()` | Combines a shape and a material into a visible `Mesh` and places it |
+| `group()` | Holds several shapes so they move together, like the cabin or the wizard |
+| Hemisphere/directional/point lights | Make the shapes look three-dimensional and cast shadows |
 | `OrbitControls` | Lets mouse, touch, and keyboard control the camera |
-| `setAnimationLoop` | Updates the scene and renders each frame |
+| `EffectComposer` / `UnrealBloomPass` | Add the glow around bright objects |
+| `PIXEL_SIZE` / `resize()` | Draw a small picture and scale it up for the pixel-art look |
+| `setAnimationLoop` | Moves things a little and draws each frame |
 
 For an AI assistant, try:
 
@@ -105,7 +114,8 @@ use software rendering and are not a performance benchmark for a player's GPU.
   This example expects `public/models/scene.glb` and an existing `scene`.
   Avoid `/models/scene.glb`, which can break under itch.io or a subdirectory.
 - Start with a few objects, simple lighting, small textures, and limited shadows.
-  The demo already resizes the canvas and caps pixel ratio at 2 for larger screens.
+  The demo already resizes the canvas, draws few pixels in its pixel look, and
+  caps pixel ratio at 2 in its smooth look.
 - Sound normally needs a player's click/tap first. Include touch controls if you
   claim mobile support, and test keyboard focus inside the itch.io iframe.
 

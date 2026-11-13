@@ -30,26 +30,33 @@ test('pointer controls work at phone dimensions', async ({ page }) => {
   const canvas = page.locator('canvas');
   await expect(canvas).toBeVisible();
   const box = await canvas.boundingBox();
-  await page.mouse.move(box.x + box.width * 180 / 800, box.y + box.height * 300 / 450);
+  // The first spark sits at (246, 104) in the game's 400 × 225 pixel world.
+  await page.mouse.move(box.x + box.width * 246 / 400, box.y + box.height * 104 / 225);
   await page.mouse.down();
   await expect(page.getByRole('status')).toHaveText('Sparks: 1 / 8');
   await page.mouse.up();
 });
 
-test('Three.js renders in WebGL 2 and its camera, pause, and reset controls work', async ({ page }) => {
+test('Three.js renders in WebGL 2 and its camera, pause, pixel, and reset controls work', async ({ page }) => {
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
   await page.goto('/');
   await page.getByRole('link', { name: 'Three.js 3D demo' }).click();
   const scene = page.locator('canvas[aria-label="Interactive 3D canvas"]');
   await expect(scene).toBeVisible();
-  await expect(page.getByRole('status')).toHaveText('3D demo · auto-rotate on');
+  await expect(page.getByRole('status')).toHaveText('3D demo · animation on');
   expect(await scene.evaluate(element => {
     const gl = element.getContext('webgl2');
     return gl !== null && !gl.isContextLost();
   })).toBe(true);
-  await page.getByRole('button', { name: 'Pause rotation' }).click();
-  await expect(page.getByRole('status')).toHaveText('3D demo · auto-rotate off');
+  // The pixel look draws a small picture and scales it up; the smooth look draws every pixel.
+  const pixelWidth = await scene.evaluate(element => element.width);
+  await page.getByRole('button', { name: 'Smooth look' }).click();
+  await expect.poll(() => scene.evaluate(element => element.width)).toBeGreaterThan(pixelWidth);
+  await page.getByRole('button', { name: 'Pixel look' }).click();
+  await expect.poll(() => scene.evaluate(element => element.width)).toBe(pixelWidth);
+  await page.getByRole('button', { name: 'Pause animation' }).click();
+  await expect(page.getByRole('status')).toHaveText('3D demo · animation off');
   const originalView = (await scene.screenshot()).toString('base64');
   await scene.focus();
   await page.keyboard.press('ArrowRight');
@@ -63,7 +70,7 @@ test('Three.js renders in WebGL 2 and its camera, pause, and reset controls work
   await page.mouse.up();
   await expect.poll(async () => (await scene.screenshot()).toString('base64')).not.toBe(phoneView);
   await page.getByRole('button', { name: 'Reset view' }).click();
-  await expect(page.getByRole('status')).toHaveText('3D demo · auto-rotate on');
+  await expect(page.getByRole('status')).toHaveText('3D demo · animation on');
   expect(errors).toEqual([]);
 });
 
@@ -97,9 +104,9 @@ test('the actual submission ZIP runs under a subdirectory inside an iframe', asy
     // The same uploaded ZIP also includes the Three.js demo, with relative chunks.
     await frame.getByRole('link', { name: 'Three.js 3D demo' }).click();
     await expect(frame.locator('canvas[aria-label="Interactive 3D canvas"]')).toBeVisible();
-    await expect(frame.getByRole('status')).toHaveText('3D demo · auto-rotate on');
-    await frame.getByRole('button', { name: 'Pause rotation' }).click();
-    await expect(frame.getByRole('status')).toHaveText('3D demo · auto-rotate off');
+    await expect(frame.getByRole('status')).toHaveText('3D demo · animation on');
+    await frame.getByRole('button', { name: 'Pause animation' }).click();
+    await expect(frame.getByRole('status')).toHaveText('3D demo · animation off');
   } finally {
     await page.goto('about:blank');
     await new Promise(resolve => server.close(resolve));

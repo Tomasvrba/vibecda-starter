@@ -1,8 +1,96 @@
-:root{font-family:system-ui,sans-serif;color:#f4ead8;background:#10231f;font-synthesis:none;color-scheme:dark}
-*{box-sizing:border-box}body{margin:0}main{max-width:880px;padding:32px 20px;margin:auto}
-.eyebrow{text-transform:uppercase;letter-spacing:.2em;font-size:.72rem;color:#9dcbaf}h1{font-size:clamp(2.4rem,7vw,4rem);margin:8px 0}header p{color:#bdcfc2;line-height:1.6}
-.toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:24px}#score{font-weight:700}
-button{background:#ffd477;border:0;color:#10231f;border-radius:8px;padding:12px 18px;font:inherit;cursor:pointer}button:focus-visible{outline:3px solid white;outline-offset:3px}
-nav{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:24px}nav a{color:#ffe3a5;text-underline-offset:4px}nav a:focus-visible{outline:3px solid white;outline-offset:4px}.toolbar{flex-wrap:wrap}.toolbar #score{margin-right:auto}canvas:focus-visible{outline:3px solid #ffd477;outline-offset:-4px}
-#game{width:100%;aspect-ratio:16/9;overflow:hidden;border:1px solid #4c7160;border-radius:16px;touch-action:none}canvas{display:block}
-#instructions,footer{font-size:.85rem;line-height:1.8;color:#bdcfc2}footer{border-top:1px solid #355347;padding-top:16px;margin-top:24px}kbd,code{font-family:monospace;color:#ffe3a5}
+/* The page around the game. Colors and fonts match the vibeCDA participant guide. */
+@font-face {
+  font-family: "Press Start 2P";
+  src: url("./assets/fonts/press-start-2p-latin.woff2") format("woff2");
+  font-display: swap;
+}
+
+:root {
+  color-scheme: dark;
+  --bg: #0b0f2a;
+  --bg-deep: #060918;
+  --panel: #12183a;
+  --panel-2: #1a2250;
+  --border: #2a3570;
+  --cyan: #3de0ff;
+  --cyan-dim: #1aa8c4;
+  --gold: #f0a830;
+  --text: #e8ecff;
+  --muted: #a8b0d8;
+  --pixel-font: "Press Start 2P", monospace;
+  background: var(--bg);
+  font-synthesis: none;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--text);
+  background:
+    radial-gradient(at 20% 0%, #1a1450 0%, transparent 50%),
+    radial-gradient(at 80% 10%, #0e2a4a 0%, transparent 45%),
+    linear-gradient(#060918 0%, #0b0f2a 40%, #0d1235 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+/* A few fixed stars behind the page. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(1px 1px at 8% 12%, #ffffffb3, transparent),
+    radial-gradient(1px 1px at 22% 38%, #ffffff73, transparent),
+    radial-gradient(1.5px 1.5px at 41% 8%, #3de0ff8c, transparent),
+    radial-gradient(1px 1px at 58% 55%, #ffffff66, transparent),
+    radial-gradient(1px 1px at 73% 18%, #ffffffa6, transparent),
+    radial-gradient(1.5px 1.5px at 88% 42%, #f0a83080, transparent),
+    radial-gradient(1px 1px at 15% 72%, #ffffff59, transparent),
+    radial-gradient(1px 1px at 67% 80%, #ffffff80, transparent),
+    radial-gradient(1px 1px at 93% 88%, #3de0ff66, transparent);
+  opacity: .85;
+}
+
+/* 846px leaves the game exactly 800px wide: two screen pixels per game pixel. */
+main { position: relative; max-width: 846px; margin: auto; padding: 1rem 20px 3rem; }
+
+nav { display: flex; flex-wrap: wrap; justify-content: center; gap: .4rem; margin-bottom: 1.5rem; }
+nav a { padding: .6rem .7rem; font: .58rem/1.6 var(--pixel-font); color: var(--text); text-decoration: none; border-radius: 8px; }
+nav a:hover { background: var(--panel-2); color: var(--cyan); }
+nav a[aria-current] { color: var(--bg-deep); background: var(--gold); }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
+
+header { text-align: center; }
+.eyebrow { font: .58rem/1.9 var(--pixel-font); color: var(--muted); margin: 0 0 .75rem; }
+h1 { font: 400 clamp(1.1rem, 4.5vw, 1.9rem)/1.6 var(--pixel-font); letter-spacing: .02em; color: white; text-shadow: 0 0 18px #3de0ff59; margin: 0 0 .75rem; }
+.accent { color: var(--cyan); }
+.lead { color: var(--muted); font-size: 1.1rem; margin: 0; }
+
+.toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem; margin: 1.5rem 0 1rem; }
+#score { margin: 0 auto 0 0; font: .68rem/1.8 var(--pixel-font); color: var(--gold); }
+
+button { font: .6rem/1.7 var(--pixel-font); padding: .8rem 1rem; border-radius: 8px; border: 3px solid var(--border); background: var(--panel); color: var(--cyan); cursor: pointer; }
+button:hover { border-color: var(--cyan-dim); background: var(--panel-2); }
+#restart { border-color: var(--cyan); background: linear-gradient(#1ee8ff, #0ab8d4); color: #041018; box-shadow: 0 4px 0 #067a8c, 0 0 20px #3de0ff33; }
+#restart:hover { filter: brightness(1.08); }
+#restart:active { transform: translateY(2px); box-shadow: 0 2px 0 #067a8c, 0 0 20px #3de0ff33; }
+
+#game { width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border: 3px solid var(--border); border-radius: 12px; background: var(--bg-deep); box-shadow: 0 12px 40px #0007, 0 0 60px #3de0ff14; touch-action: none; }
+canvas { display: block; }
+canvas:focus-visible { outline: 3px solid var(--gold); outline-offset: -5px; }
+
+#instructions { color: var(--muted); font-size: .95rem; margin: 1rem 0 0; }
+kbd, code { font-family: ui-monospace, "Cascadia Code", Menlo, Consolas, monospace; font-size: .9em; color: var(--cyan); background: var(--bg-deep); padding: .15rem .4rem; border: 1px solid var(--border); border-radius: 4px; }
+footer { text-align: center; border-top: 2px solid var(--border); margin-top: 2rem; padding-top: 1.25rem; color: var(--muted); font-size: .9rem; }
+
+@media (max-width: 560px) {
+  main { padding: .75rem 12px 2rem; }
+  nav a { font-size: .5rem; }
+  #score { font-size: .58rem; }
+}

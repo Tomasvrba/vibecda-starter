@@ -1,13 +1,17 @@
 import Phaser from 'phaser';
-import { LakeScene } from './game';
+import { IslandScene, WIDTH, HEIGHT } from './game';
 
-new Phaser.Game({
+const start = () => new Phaser.Game({
   type: Phaser.AUTO,
   parent: 'game',
-  width: 800,
-  height: 450,
-  backgroundColor: '#173d35',
+  width: WIDTH,
+  height: HEIGHT,
+  backgroundColor: '#0b0f2a',
+  // pixelArt keeps every pixel sharp when the small canvas is scaled up.
+  pixelArt: true,
   scale: { mode: Phaser.Scale.FIT, autoCenter: Phaser.Scale.CENTER_BOTH },
-  scene: LakeScene,
-  render: { antialias: true },
+  scene: IslandScene,
 });
+
+// Wait for the pixel font so text drawn inside the game uses it from the start.
+document.fonts.load('8px "Press Start 2P"').then(start, start);
