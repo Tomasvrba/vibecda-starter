@@ -22,7 +22,7 @@
       }
     }
   },
-  "image": "ghcr.io/vibecda/vibecda-dev:cc01609ba690d06f763ff1b689468ef27b12bcce",
+  "image": "ghcr.io/vibecda/vibecda-dev:92b512feb4a4339187218f2cc0d29f833ad3e3e8",
   "features": {
     "ghcr.io/devcontainers/features/sshd:1.1.0": {}
   }
