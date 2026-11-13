@@ -1,6 +1,5 @@
 // vibeCDA showcase: renders games.json as a scrolling deck. No dependencies, no build step.
 const MODELS = { fable: 'Fable 5.2', opus: 'Opus 5.5' };
-const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const $ = (selector, root = document) => root.querySelector(selector);
 const pad = (n) => String(n).padStart(2, '0');
 
@@ -33,22 +32,24 @@ function poster(game, eager = false) {
   return box;
 }
 
-/** The picture: opens the video if there is one, otherwise the game itself. */
+/** The picture. Its play button plays the video right here; without a video it opens the game. */
 function media(game, eager, live = false) {
-  if (game.video) {
-    const preview = live && game.preview && h('video', { class: 'preview', src: game.preview, loop: true, playsinline: true, preload: 'none', tabindex: '-1', 'aria-hidden': 'true' });
-    if (preview) {
-      preview.muted = true;
-      preview.addEventListener('playing', () => preview.classList.add('on'), { once: true });
-    }
-    const source = game.video.type === 'x' ? 'X' : 'YouTube';
-    const length = duration(game.video.seconds);
-    return h('button', { type: 'button', class: preview ? 'media live' : 'media', 'aria-label': `Watch the ${game.title} video`, onclick: () => openTheater(game) },
-      poster(game, eager), preview, svg('<svg viewBox="0 0 10 10"><path d="M2 1l7 4-7 4z"/></svg>'),
-      h('span', { class: 'media-label' }, `${preview ? 'Watch with sound' : 'Watch'}${length ? ` · ${length}` : ''} · ${source}`));
+  const { video, clip } = game;
+  const play = svg('<svg viewBox="0 0 10 10"><path d="M2 1l7 4-7 4z"/></svg>');
+  if (!video) {
+    return h('a', { class: 'media', href: game.play, target: '_blank', rel: 'noopener', 'aria-label': `Play ${game.title} in a new tab` },
+      poster(game, eager), h('span', { class: 'media-label' }, 'No video · opens the game'));
   }
-  return h('a', { class: 'media', href: game.play, target: '_blank', rel: 'noopener', 'aria-label': `Play ${game.title} in a new tab` },
-    poster(game, eager), h('span', { class: 'media-label' }, 'No video · opens the game'));
+  if (!clip && video.type !== 'youtube') {
+    return h('a', { class: 'media', href: video.url, target: '_blank', rel: 'noopener', 'aria-label': `Watch the ${game.title} video on X` },
+      poster(game, eager), play, h('span', { class: 'media-label' }, 'Watch on X'));
+  }
+  const label = clip ? `${clip.sound ? 'Play with sound' : 'Play clip'} · ${duration(clip.seconds)}` : 'Watch · YouTube';
+  const box = h('div', { class: live && clip ? 'media live' : 'media' }, poster(game, eager), live && clip && clipVideo(game));
+  box.append(h('button', { type: 'button', class: 'media-play', 'aria-label': `Play the ${game.title} video`, onclick: () => playHere(box) }, play, h('span', { class: 'media-label' }, label)));
+  box.game = game;
+  box.live = Boolean(live && clip);
+  return box;
 }
 
 const tags = (game, count) => h('p', { class: 'sheet-top' },
@@ -61,9 +62,10 @@ const tags = (game, count) => h('p', { class: 'sheet-top' },
 const byline = (game) => h('p', { class: 'by' }, 'by ', external(game.creatorUrl, game.creator));
 
 function actions(game, small) {
+  const { video } = game;
   return h('p', { class: 'actions' },
     external(game.play, 'Play it', small ? 'btn btn-small' : 'btn'),
-    !small && game.video && h('button', { type: 'button', class: 'btn btn-ghost', onclick: () => openTheater(game) }, 'Watch'),
+    video && external(video.url, video.type === 'x' ? `Full video on X${video.seconds ? ` (${duration(video.seconds)})` : ''}` : 'Video on YouTube'),
     game.links.map((link) => external(link.url, link.label)));
 }
 
@@ -100,71 +102,56 @@ function gridCard(game, index) {
   return card;
 }
 
-function floatCard(game, index) {
-  return h('div', { class: 'float', 'data-model': game.model, style: `--i:${index}` },
-    h('a', { href: `#g-${game.id}`, 'aria-label': `${game.title}, made with ${MODELS[game.model]}` }, poster(game, true), h('span', { class: 'name' }, game.title)));
+
+// ---------- playing a video in place ----------
+let playing; // the .media box that is playing with sound, if any
+
+function clipVideo(game) {
+  const video = h('video', { class: 'clip', src: game.clip.src, loop: true, playsinline: true, preload: 'none', tabindex: '-1' });
+  video.muted = true;
+  video.addEventListener('playing', () => video.classList.add('on'), { once: true });
+  return video;
 }
 
-// ---------- video theater ----------
-const theater = $('#theater');
-const stage = $('#theater-stage');
-let twitter;
-let theaterRun = 0;
-
-function loadTwitter() {
-  twitter ??= new Promise((resolve, reject) => {
-    const script = h('script', { src: 'https://platform.twitter.com/widgets.js', async: true });
-    script.addEventListener('load', () => (window.twttr?.ready ? window.twttr.ready(resolve) : reject(new Error('X widgets unavailable'))));
-    script.addEventListener('error', () => { twitter = undefined; reject(new Error('X widgets blocked')); });
-    document.head.append(script);
-  });
-  return twitter;
-}
-
-async function openTheater(game) {
-  const { video } = game;
-  const run = ++theaterRun;
-  const where = video.type === 'x' ? 'X' : 'YouTube';
-  $('#theater-title').textContent = game.title;
-  $('#theater-foot').replaceChildren(video.type === 'x' && h('span', {}, 'Press play inside the post to watch with sound.'), external(video.url, `Open on ${where} ↗`), external(game.play, 'Play the game ↗'));
-  theater.dataset.kind = video.type;
-  theater.dataset.model = game.model;
-  const loading = h('p', { class: 'loading' }, `Loading the video from ${where}…`);
-  loading.insertAdjacentHTML('afterbegin', '<svg class="spark" aria-hidden="true"><use href="#spark"/></svg>');
-  stage.replaceChildren(loading);
-  if (!theater.open) theater.showModal();
-
-  const fail = () => {
-    if (run !== theaterRun) return;
-    stage.replaceChildren(h('p', { class: 'loading' }, 'The video did not load here. ', external(video.url, `Watch it on ${where} ↗`)));
-  };
-  if (video.type === 'youtube') {
-    const start = video.start ? `&start=${video.start}` : '';
-    stage.replaceChildren(h('iframe', { class: 'yt', src: `https://www.youtube-nocookie.com/embed/${video.id}?autoplay=1&rel=0${start}`, title: `${game.title} video`, allow: 'autoplay; encrypted-media; picture-in-picture; fullscreen', allowfullscreen: true, referrerpolicy: 'strict-origin-when-cross-origin' }));
+function playHere(box) {
+  if (playing && playing !== box) stopHere(playing);
+  playing = box;
+  box.classList.add('playing');
+  const { game } = box;
+  if (!game.clip) {
+    const start = game.video.start ? `&start=${game.video.start}` : '';
+    box.append(h('iframe', { src: `https://www.youtube-nocookie.com/embed/${game.video.id}?autoplay=1&rel=0${start}`, title: `${game.title} video`, allow: 'autoplay; encrypted-media; picture-in-picture; fullscreen', allowfullscreen: true, referrerpolicy: 'strict-origin-when-cross-origin' }));
     return;
   }
-  const timer = setTimeout(() => { if (run === theaterRun && stage.contains(loading)) fail(); }, 15000);
-  try {
-    const twttr = await loadTwitter();
-    if (run !== theaterRun) return;
-    const mount = h('div', {});
-    stage.append(mount);
-    const tweet = await twttr.widgets.createTweet(video.id, mount, { theme: 'dark', dnt: true, conversation: 'none', align: 'center' });
-    if (run !== theaterRun) return;
-    if (tweet) loading.remove(); else fail();
-  } catch {
-    fail();
-  } finally {
-    clearTimeout(timer);
-  }
+  let video = $('video.clip', box);
+  if (!video) box.append(video = clipVideo(game));
+  video.loop = false;
+  video.muted = false;
+  video.controls = true;
+  video.tabIndex = 0;
+  video.currentTime = 0;
+  video.onended = () => stopHere(box);
+  video.play().catch(() => {});
 }
-theater.addEventListener('close', () => { theaterRun++; stage.replaceChildren(); });
-theater.addEventListener('click', (event) => { if (event.target === theater) theater.close(); });
-$('#theater-close').addEventListener('click', () => theater.close());
+
+/** Back to the picture (or, in a featured scene, the muted loop). */
+function stopHere(box) {
+  if (playing === box) playing = undefined;
+  box.classList.remove('playing');
+  $('iframe', box)?.remove();
+  const video = $('video.clip', box);
+  if (!video) return;
+  if (!box.live) return video.remove();
+  video.onended = null;
+  video.controls = false;
+  video.tabIndex = -1;
+  video.muted = true;
+  video.loop = true;
+  if (box.visible) video.play().catch(() => {}); else video.pause();
+}
 
 // ---------- deck navigation ----------
 let scenes = [];
-const behavior = () => (reduceMotion.matches ? 'auto' : 'smooth');
 function currentScene() {
   let index = 0;
   scenes.forEach((scene, i) => { if (scene.getBoundingClientRect().top <= innerHeight * 0.4) index = i; });
@@ -174,24 +161,24 @@ function go(direction) {
   const index = currentScene();
   const box = scenes[index].getBoundingClientRect();
   // A scene taller than the screen (the grid, or any scene on a phone) scrolls through before moving on.
-  if (direction > 0 && box.bottom > innerHeight + 40) return scrollBy({ top: innerHeight * 0.85, behavior: behavior() });
+  if (direction > 0 && box.bottom > innerHeight + 40) return scrollBy({ top: innerHeight * 0.85, behavior: 'smooth' });
   if (direction < 0 && box.top < -40) {
-    return box.top < -innerHeight ? scrollBy({ top: -innerHeight * 0.85, behavior: behavior() }) : scenes[index].scrollIntoView({ behavior: behavior() });
+    return box.top < -innerHeight ? scrollBy({ top: -innerHeight * 0.85, behavior: 'smooth' }) : scenes[index].scrollIntoView({ behavior: 'smooth' });
   }
-  scenes[Math.max(0, Math.min(scenes.length - 1, index + direction))].scrollIntoView({ behavior: behavior() });
+  scenes[Math.max(0, Math.min(scenes.length - 1, index + direction))].scrollIntoView({ behavior: 'smooth' });
 }
 addEventListener('keydown', (event) => {
-  if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey || theater.open) return;
+  if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey) return;
   const target = event.target instanceof Element ? event.target : document.body;
-  if (target.closest('input, textarea, select, [contenteditable]')) return;
+  if (target.closest('input, textarea, select, video, [contenteditable]')) return;
   const onControl = target.closest('button, a');
   const key = event.key;
   let direction = 0;
   if (key === 'ArrowDown' || key === 'PageDown' || key === 'ArrowRight') direction = 1;
   else if (key === 'ArrowUp' || key === 'PageUp' || key === 'ArrowLeft') direction = -1;
   else if (key === ' ' && !onControl) direction = event.shiftKey ? -1 : 1;
-  else if (key === 'Home') { scenes[0].scrollIntoView({ behavior: behavior() }); event.preventDefault(); return; }
-  else if (key === 'End') { scenes.at(-1).scrollIntoView({ behavior: behavior() }); event.preventDefault(); return; }
+  else if (key === 'Home') { scenes[0].scrollIntoView({ behavior: 'smooth' }); event.preventDefault(); return; }
+  else if (key === 'End') { scenes.at(-1).scrollIntoView({ behavior: 'smooth' }); event.preventDefault(); return; }
   if (!direction) return;
   event.preventDefault();
   go(direction);
@@ -230,10 +217,10 @@ function setUpDeck() {
   update();
 }
 
-// ---------- hero parallax and starfield ----------
+// ---------- hero tilt and starfield ----------
 function setUpHero() {
   const hero = $('.hero');
-  if (reduceMotion.matches || !matchMedia('(hover: hover)').matches) return;
+  if (!matchMedia('(hover: hover)').matches) return;
   hero.addEventListener('pointermove', (event) => {
     hero.style.setProperty('--mx', (event.clientX / innerWidth - 0.5).toFixed(3));
     hero.style.setProperty('--my', (event.clientY / innerHeight - 0.5).toFixed(3));
@@ -261,47 +248,86 @@ function setUpSky() {
     ctx.clearRect(0, 0, width, height);
     for (const star of stars) {
       const y = (((star.y - scrollY * star.depth) % height) + height) % height;
-      ctx.globalAlpha = reduceMotion.matches ? 0.55 : 0.3 + 0.5 * (0.5 + 0.5 * Math.sin(star.phase + time * 0.001 * star.speed));
+      ctx.globalAlpha = 0.3 + 0.5 * (0.5 + 0.5 * Math.sin(star.phase + time * 0.001 * star.speed));
       ctx.fillStyle = star.color;
       ctx.fillRect(Math.round(star.x), Math.round(y), star.size, star.size);
     }
   };
-  const loop = (time) => { draw(time); if (!reduceMotion.matches) requestAnimationFrame(loop); };
+  const loop = (time) => { draw(time); requestAnimationFrame(loop); };
   addEventListener('resize', resize);
   resize();
-  if (reduceMotion.matches) addEventListener('scroll', () => draw(0), { passive: true });
-  else requestAnimationFrame(loop);
+  requestAnimationFrame(loop);
 }
 
-/** Muted clips: the hero reel and each featured scene's preview play only while on screen. */
-function setUpClips(reel, games) {
+/** Clips play only while on screen: featured scenes loop theirs muted, and one playing with sound stops when it leaves. */
+function setUpClips() {
   const watch = new IntersectionObserver((entries) => {
-    for (const { target, isIntersecting } of entries) {
-      if (isIntersecting && !reduceMotion.matches) target.play().catch(() => {});
-      else target.pause();
+    for (const { target: box, isIntersecting } of entries) {
+      box.visible = isIntersecting;
+      const video = $('video.clip', box);
+      if (!isIntersecting) { if (box === playing) stopHere(box); else video?.pause(); }
+      else if (box.live && box !== playing) video?.play().catch(() => {});
     }
   }, { threshold: 0.35 });
-  document.querySelectorAll('video.preview').forEach((clip) => watch.observe(clip));
+  document.querySelectorAll('div.media').forEach((box) => watch.observe(box));
+}
 
+/** The hero showreel: one silent video of short cuts, with a title card and a progress segment per game. */
+function setUpReel(reel, games) {
+  const stage = $('#stage');
   const video = $('#reel');
-  if (!reel || !video) return;
   const byId = new Map(games.map((game) => [game.id, game]));
-  const now = $('#now');
+  const clips = (reel?.clips ?? []).map((id) => byId.get(id));
+  if (!clips.length || clips.includes(undefined)) return stage.closest('.stage-wrap').remove();
+
+  let wanted = true; // false once the visitor pauses it
+  let visible = false;
+  const play = () => { if (wanted && visible) video.play().catch(() => {}); };
+  const segs = clips.map((game, i) => h('button', { type: 'button', 'data-model': game.model, title: game.title, 'aria-label': `Jump to ${game.title}`,
+    onclick: () => { video.currentTime = i * reel.clipSeconds + 0.02; wanted = true; play(); } }));
+  $('#segs').append(...segs);
+  $('#reel-total').textContent = pad(clips.length);
+
   let shown = -1;
-  const caption = () => {
-    const index = Math.min(reel.clips.length - 1, Math.floor(video.currentTime / reel.clipSeconds));
-    const game = byId.get(reel.clips[index]);
-    if (index === shown || !game) return;
+  const show = (index) => {
     shown = index;
-    now.dataset.model = game.model;
-    now.replaceChildren(h('b', {}, game.title), ` · ${game.creator}`);
+    const game = clips[index];
+    const stat = game.specs[0];
+    stage.dataset.model = game.model;
+    $('#reel-count').textContent = pad(index + 1);
+    segs.forEach((seg, i) => seg.style.setProperty('--p', i < index ? 1 : 0));
+    const link = game.featured ? { href: `#g-${game.id}` } : { href: game.play, target: '_blank', rel: 'noopener' };
+    $('#lower').replaceChildren(
+      h('span', { class: `tag tag-${game.model}`, style: '--k:0' }, MODELS[game.model]),
+      h('a', { class: 'lower-title', style: '--k:1', ...link }, game.title),
+      h('span', { class: 'lower-by', style: '--k:2' }, `by ${game.creator}`, stat && h('b', {}, ` · ${stat.label}: ${stat.value}`)));
+    $('#wipe').animate([{ translate: '-180% 0' }, { translate: '820% 0' }], { duration: 560, easing: 'cubic-bezier(.6, 0, .2, 1)' });
   };
+  const update = () => {
+    const at = video.currentTime / reel.clipSeconds;
+    const index = Math.min(clips.length - 1, Math.floor(at));
+    if (index !== shown) show(index);
+    segs[index].style.setProperty('--p', Math.min(1, at - index).toFixed(3));
+  };
+  let ticking = false;
+  const tick = () => {
+    update();
+    if (video.paused) ticking = false; else requestAnimationFrame(tick);
+  };
+  video.addEventListener('playing', () => { stage.classList.remove('paused'); if (!ticking) { ticking = true; requestAnimationFrame(tick); } });
+  video.addEventListener('pause', () => stage.classList.add('paused'));
+  video.addEventListener('seeked', update);
+  const toggle = () => { wanted = video.paused; if (wanted) play(); else video.pause(); };
+  $('#reel-toggle').addEventListener('click', toggle);
+  video.addEventListener('click', toggle);
+
   video.muted = true;
   video.poster = reel.poster;
   video.src = reel.src;
-  video.addEventListener('timeupdate', caption);
-  video.addEventListener('loadeddata', () => { $('.hero').classList.add('reel-on'); caption(); }, { once: true });
-  watch.observe(video);
+  show(0);
+  new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; if (visible) play(); else video.pause(); }, { threshold: 0.3 }).observe(stage);
+  // Browsers that hold back autoplay (battery saver, strict settings) start it on the first tap, click or key.
+  for (const type of ['pointerdown', 'keydown', 'touchstart']) addEventListener(type, () => { if (video.paused) play(); }, { passive: true });
 }
 
 // ---------- gallery filters ----------
@@ -340,7 +366,7 @@ async function start() {
   let games = [];
   let reel;
   try {
-    const response = await fetch('./games.json');
+    const response = await fetch('./games.json', { cache: 'no-cache' });
     if (!response.ok) throw new Error(`games.json: HTTP ${response.status}`);
     ({ games, reel } = await response.json());
   } catch (error) {
@@ -356,12 +382,12 @@ async function start() {
   const deck = order.filter(Boolean);
 
   $('#featured').append(...deck.map((game, i) => featureScene(game, i, deck.length)));
-  $('#floats').append(...deck.filter((game) => game.poster).slice(0, 8).map(floatCard));
   $('#grid').append(...[...games].sort((a, b) => Number(b.weekend) - Number(a.weekend)).map(gridCard));
   for (const id of ['game-count', 'all-count']) $(`#${id}`).textContent = games.length || '';
 
   setUpFilters();
-  setUpClips(reel, games);
+  setUpClips();
+  setUpReel(reel, games);
   setUpDeck();
   setUpHero();
   if (location.hash) $(location.hash)?.scrollIntoView();

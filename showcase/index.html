@@ -7,7 +7,7 @@
     <meta name="description" content="Browser games people built with Claude Fable 5.2 and Opus 5.5: what they made, how, and what it cost. A quick look before the vibeCDA game jam." />
     <title>What can you build in a weekend? · vibeCDA showcase</title>
     <script>document.documentElement.classList.add('js');</script>
-    <link rel="stylesheet" href="./showcase.css" />
+    <link rel="stylesheet" href="./showcase.css?v=3" />
   </head>
   <body>
     <a class="skip" href="#featured">Skip to the games</a>
@@ -40,26 +40,41 @@
 
     <main>
       <section class="scene hero" id="top" data-title="Start">
-        <div class="reel" aria-hidden="true"><video id="reel" muted loop playsinline preload="auto" tabindex="-1"></video></div>
-        <div class="floats" id="floats" aria-label="A few of the games"></div>
-        <div class="hero-copy">
-          <p class="eyebrow r" style="--i:0">vibeCDA 2026 · before you build</p>
-          <h1>
-            <span class="w r" style="--i:1">What</span> <span class="w r" style="--i:2">can</span> <span class="w r" style="--i:3">you</span>
-            <span class="w r" style="--i:4">build</span><br />
-            <span class="w r accent" style="--i:5">in</span> <span class="w r accent" style="--i:6">a</span> <span class="w r accent" style="--i:7">weekend?</span>
-          </h1>
-          <p class="lead r" style="--i:9"><span id="game-count">43</span> browser games people built by talking to Claude. Most are a single web page.</p>
-          <p class="legend r" style="--i:10">
-            <span class="tag tag-fable">Fable 5.2</span>
-            <span class="tag tag-opus">Opus 5.5</span>
-            <span class="legend-note">the two models that made them</span>
-          </p>
-          <p class="hero-actions r" style="--i:11">
-            <a class="btn" href="#featured">See the games</a>
-            <a class="btn btn-ghost" href="#all">Browse all</a>
-          </p>
-          <p class="now r" style="--i:12" id="now" aria-hidden="true"></p>
+        <div class="wrap hero-inner">
+          <div class="hero-copy">
+            <p class="eyebrow r" style="--i:0">vibeCDA 2026 · before you build</p>
+            <h1>
+              <span class="w r" style="--i:1">What</span> <span class="w r" style="--i:2">can</span><br />
+              <span class="w r" style="--i:3">you</span> <span class="w r" style="--i:4">build</span><br />
+              <span class="w r accent" style="--i:5">in</span> <span class="w r accent" style="--i:6">a</span> <span class="w r accent" style="--i:7">weekend?</span>
+            </h1>
+            <p class="lead r" style="--i:9"><span id="game-count">43</span> browser games people built by talking to Claude. Most are a single web page.</p>
+            <p class="legend r" style="--i:10">
+              <span class="tag tag-fable">Fable 5.2</span>
+              <span class="tag tag-opus">Opus 5.5</span>
+              <span class="legend-note">the two models that made them</span>
+            </p>
+            <p class="hero-actions r" style="--i:11">
+              <a class="btn" href="#featured">See the games</a>
+              <a class="btn btn-ghost" href="#all">Browse all</a>
+            </p>
+          </div>
+          <div class="stage-wrap r" style="--i:4">
+            <div class="stage paused" id="stage" data-model="fable" role="group" aria-label="Showreel: short clips from some of the games">
+              <video id="reel" muted loop autoplay playsinline preload="auto" tabindex="-1" aria-hidden="true"></video>
+              <div class="stage-top">
+                <div class="segs" id="segs"></div>
+                <p class="stage-count" aria-hidden="true"><i></i>Showreel <span id="reel-count">01</span> / <span id="reel-total">16</span></p>
+              </div>
+              <span class="wipe" id="wipe" aria-hidden="true"></span>
+              <div class="lower" id="lower"></div>
+              <button type="button" class="stage-toggle" id="reel-toggle" aria-label="Pause or play the showreel">
+                <svg class="i-pause" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 1h2.5v8H2zM5.5 1H8v8H5.5z" /></svg>
+                <svg class="i-play" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 1l7 4-7 4z" /></svg>
+              </button>
+            </div>
+            <p class="stage-note">16 of the games in 40 seconds. Select a title to see how it was made.</p>
+          </div>
         </div>
         <p class="hint r" style="--i:14" aria-hidden="true"><svg class="spark"><use href="#spark" /></svg> scroll, or press <kbd>↓</kbd> / <kbd>space</kbd></p>
       </section>
@@ -139,7 +154,7 @@
             </ul>
           </div>
           <footer class="r" style="--i:7">
-            <p>Unofficial community showcase. Not affiliated with Anthropic or the creators. Details are as reported by each creator; links checked 13 Nov 2026. The short clips are excerpts from the creators' own videos; pictures and full videos load from their sites, X and YouTube.</p>
+            <p>Unofficial community showcase. Not affiliated with Anthropic or the creators. Details are as reported by each creator; links checked 13 Nov 2026. The short clips are excerpts from the creators' own videos; pictures load from their sites, and the full videos are on X and YouTube.</p>
           </footer>
         </div>
       </section>
@@ -147,16 +162,7 @@
 
     <nav class="dots" id="dots" aria-label="Jump to a scene"></nav>
 
-    <dialog id="theater" aria-labelledby="theater-title">
-      <div class="theater-head">
-        <h2 id="theater-title"></h2>
-        <button type="button" id="theater-close" aria-label="Close video">Close</button>
-      </div>
-      <div id="theater-stage"></div>
-      <p class="theater-foot" id="theater-foot"></p>
-    </dialog>
-
     <noscript><p class="noscript">This page needs JavaScript to list the games. The data is in <a href="./games.json">games.json</a>.</p></noscript>
-    <script type="module" src="./showcase.js"></script>
+    <script type="module" src="./showcase.js?v=3"></script>
   </body>
 </html>
