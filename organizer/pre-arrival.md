@@ -9,7 +9,7 @@ venue updates at https://vibecda.com. Building starts at 6pm Friday; code freeze
 and submissions are due at noon Sunday. Awards are at 6pm Sunday. All times are
 Pacific. Check the site for Sunday's venue confirmation.
 
-Participant guide: https://tomasvrba.github.io/vibecda-starter/
+Participant guide: https://vibecda.github.io/vibecda-starter/
 
 Before you arrive:
 

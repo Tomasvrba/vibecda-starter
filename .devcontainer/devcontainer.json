@@ -1,5 +1,5 @@
 {
-  "name": "vibeCDA \u00b7 game studio",
+  "name": "vibeCDA · game studio",
   "remoteUser": "node",
   "forwardPorts": [
     5173
@@ -22,7 +22,7 @@
       }
     }
   },
-  "image": "ghcr.io/tomasvrba/vibecda-dev:f7779fb13b3c3910a7f9a189bc011b7085d9b68f",
+  "image": "ghcr.io/vibecda/vibecda-dev:cc01609ba690d06f763ff1b689468ef27b12bcce",
   "features": {
     "ghcr.io/devcontainers/features/sshd:1.1.0": {}
   }

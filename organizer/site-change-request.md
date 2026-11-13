@@ -5,7 +5,7 @@ Please make these small additions to the existing site; the existing registratio
 schedule, venues, and sponsor sections can stay in place.
 
 1. Add a prominent **Participant guide / Start building** button linking to:
-   https://tomasvrba.github.io/vibecda-starter/
+   https://vibecda.github.io/vibecda-starter/
    This guide links to registration, the prepared environment, community help,
    and the two published track jams.
 2. Update the judging tables to **equal weighting**, as Tom requested:
@@ -21,7 +21,7 @@ schedule, venues, and sponsor sections can stay in place.
 4. Add **Judging closes Sunday November 15 at 5:30pm Pacific**. Code freeze and
    the submission deadline remain **noon Sunday**; awards remain **6pm Sunday**.
 5. Link community/help to:
-   https://github.com/Tomasvrba/vibecda-starter/discussions
+   https://github.com/VibeCdA/vibecda-starter/discussions
    unless the organizers prefer an existing community space.
 
 Suggested short copy:
@@ -31,7 +31,7 @@ Suggested short copy:
 > jam. You can also use your own game engine and local tools. Bring your own AI
 > account; tools are installed, but subscriptions and usage allowances are yours.
 
-Starter source: https://github.com/Tomasvrba/vibecda-starter
+Starter source: https://github.com/VibeCdA/vibecda-starter
 
 No email or message has been sent to the webmaster. Tom can forward this request
 after reviewing it and confirming the guide is ready.

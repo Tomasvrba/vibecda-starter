@@ -8,7 +8,7 @@ itself needs no API key, backend, or paid service.
 Code freeze: Sunday noon. Awards: Sunday 6pm. The event site has the schedule,
 venue updates, and registration. This starter is optional; native games are welcome.
 
-[Participant guide](https://tomasvrba.github.io/vibecda-starter/) ·
+[Participant guide](https://vibecda.github.io/vibecda-starter/) ·
 [Freeplay jam](https://itch.io/jam/vibecda-2026-freeplay) ·
 [Wizards and Lizards jam](https://itch.io/jam/vibecda-2026-wizards-and-lizards).
 Judging closes Sunday at 5:30pm Pacific. Each track uses its own five criteria,
@@ -85,6 +85,7 @@ stopping a Codespace saves compute usage, but its storage can still count.
 
 ## Organizers
 
+- [GitHub organization access and migration notes](organizer/GITHUB-ADMIN.md)
 - [Live setup status and remaining human steps](organizer/STATUS.md)
 - [Platform configuration and launch runbook](organizer/RUNBOOK.md)
 - [itch.io copy and settings](organizer/itch-setup.md)

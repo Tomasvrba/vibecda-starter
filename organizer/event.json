@@ -16,12 +16,12 @@
   "links": {
     "home": "https://vibecda.com",
     "registration": "https://forms.gle/Ez2JdeezEpTVh7Ua8",
-    "jam": "https://tomasvrba.github.io/vibecda-starter/#tracks",
-    "starterRepository": "https://github.com/Tomasvrba/vibecda-starter",
-    "codespaces": "https://codespaces.new/Tomasvrba/vibecda-starter?quickstart=1",
-    "community": "https://github.com/Tomasvrba/vibecda-starter/discussions",
+    "jam": "https://vibecda.github.io/vibecda-starter/#tracks",
+    "starterRepository": "https://github.com/VibeCdA/vibecda-starter",
+    "codespaces": "https://codespaces.new/VibeCdA/vibecda-starter?quickstart=1",
+    "community": "https://github.com/VibeCdA/vibecda-starter/discussions",
     "audienceVote": "",
-    "results": "https://tomasvrba.github.io/vibecda-starter/#tracks"
+    "results": "https://vibecda.github.io/vibecda-starter/#tracks"
   },
   "tracks": [
     {

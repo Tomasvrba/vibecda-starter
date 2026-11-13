@@ -1,6 +1,6 @@
 # Setup status
 
-Updated 2026-11-12. Live publication is in progress; this file is updated after
+Updated 2026-11-13. Live publication is in progress; this file is updated after
 each verified milestone. Do not treat prepared files as configured live services.
 
 ## Completed and published
@@ -22,13 +22,22 @@ each verified milestone. Do not treat prepared files as configured live services
   event hub generator, scoring audit tool, and archive structure.
 - Site schedule and criteria inspected. Tom requested equal-weight criteria,
   overriding the site's current weights; configuration updated accordingly.
-- Published https://github.com/Tomasvrba/vibecda-starter as a public template.
+- Published https://github.com/VibeCdA/vibecda-starter as a public template.
   Discussions enabled. GitHub's Check starter workflow passes.
 - Environment image publishing workflow completed successfully:
-  https://github.com/Tomasvrba/vibecda-starter/actions/runs/43301359170
-  Published image: ghcr.io/tomasvrba/vibecda-dev:f7779fb13b3c3910a7f9a189bc011b7085d9b68f
+  https://github.com/VibeCdA/vibecda-starter/actions/runs/43484301173
+  Published image: ghcr.io/vibecda/vibecda-dev:cc01609ba690d06f763ff1b689468ef27b12bcce
   The default devcontainer now references this prepared image. A local-build
-  configuration is also available for Apple Silicon and image rebuilds.
+  configuration is also available for Apple Silicon and image rebuilds. Anonymous
+  registry access to the organization image was verified. The old personal image
+  remains available as a fallback.
+- Transferred the starter to VibeCdA, preserving repository ID and history.
+  Added a public organization profile in VibeCdA/.github. Base member access is
+  None; Organizers has Maintain and Mentors has Triage on the starter. Main branch
+  changes require CI, review, and resolved conversations for non-admins; force
+  pushes and deletion are blocked. Member deletion/transfer, visibility changes,
+  private repository creation, and team creation are restricted to owners.
+  See GITHUB-ADMIN.md for settings, migration details, and rollback instructions.
 - Tom completed itch.io login and email verification. Host account: tmsvr.
 - Published Freeplay: https://itch.io/jam/vibecda-2026-freeplay (jam ID 422198).
 - Published Wizards and Lizards:
@@ -49,7 +58,7 @@ each verified milestone. Do not treat prepared files as configured live services
   prepared in audience-ballot.html; per-track audience awards need confirmation.
 - Tom does not manage the existing website. Prepared site-change-request.md for
   Tom to pass to the webmaster. The participant guide is hosted on GitHub
-  Pages at https://tomasvrba.github.io/vibecda-starter/. Deployment succeeded and
+  Pages at https://vibecda.github.io/vibecda-starter/. Deployment succeeded and
   the public page returns HTTP 200. Both jam links are configured and event:check
   passes. The updated guide is deployed without a draft banner, both jam links
   are visible, and GitHub CI passes. Website rubric changes still need the webmaster.
@@ -63,6 +72,10 @@ each verified milestone. Do not treat prepared files as configured live services
 - Test a participant-owned Codespace and AI login using that person's own account.
   Include a full T3 Code desktop → Codespace pilot if participants want T3;
   the local SSH test does not verify that complete integration.
+- Require organization-wide two-factor authentication manually if GitHub allows
+  the save. The sole owner's 2FA is enabled, but GitHub's native-browser form
+  redirected to a 404 at /organizations/VibeCdA/settings/two_factor_enforcement.
+  The API did not change the setting. The org requirement remains off.
 
 ## Undo
 

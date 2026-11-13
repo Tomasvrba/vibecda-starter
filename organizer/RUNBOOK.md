@@ -2,13 +2,13 @@
 
 ## GitHub and environment publication
 
-1. Publish this project as Tomasvrba/vibecda-starter, a public template repository.
+1. Publish this project as VibeCdA/vibecda-starter, a public template repository.
    Enable Discussions as a persistent community/help space if no existing chat
    is supplied. Use GitHub Issues for environment bugs.
 2. Run the manual **Publish development environment** workflow. Its image name is
-   ghcr.io/tomasvrba/vibecda-dev with an immutable source-commit tag. The first
+   ghcr.io/vibecda/vibecda-dev with an immutable source-commit tag. The first
    package publication may be private; make the package public before use.
-3. Run `node scripts/use-prebuilt.mjs ghcr.io/tomasvrba/vibecda-dev:COMMIT` and commit
+3. Run `node scripts/use-prebuilt.mjs ghcr.io/vibecda/vibecda-dev:COMMIT` and commit
    the updated devcontainer. Keep the Dockerfile for future rebuilds. Image changes
    require a new build/tag; don't silently update tools during the event.
 4. Check the Codespaces launch flow from a participant account with no write
