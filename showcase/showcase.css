@@ -151,6 +151,22 @@ kbd, code { font-family: ui-monospace, "Cascadia Code", Menlo, Consolas, monospa
 .hint { position: absolute; left: 0; right: 0; bottom: 1.1rem; z-index: 2; color: var(--muted); font-size: .88rem; }
 .hint .spark { animation: bob 1s ease-in-out infinite alternate; margin-right: .3rem; }
 
+/* The reel: a muted montage of the games behind the headline, dimmed and faded at the edges. */
+.reel { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+.reel video { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; transition: opacity 1.4s ease; }
+.hero.reel-on .reel video { opacity: .66; }
+.reel::after {
+  content: ""; position: absolute; inset: 0;
+  background:
+    repeating-linear-gradient(#0000 0 3px, #06091838 3px 4px),
+    linear-gradient(90deg, #060918 0%, #06091800 27%, #06091800 73%, #060918 100%),
+    linear-gradient(#060918 0%, #06091800 24%, #06091800 68%, #0b0f2a 100%),
+    radial-gradient(ellipse 48% 42% at 50% 47%, #060918b8, #06091840 100%);
+}
+.now { margin-top: 1.5rem; font: .5rem/1.8 var(--pixel-font); color: var(--muted); min-height: 1.8em; }
+.now::before { content: ""; display: inline-block; width: 8px; height: 8px; margin-right: .6rem; background: var(--accent); }
+.now b { color: white; font-weight: 400; }
+
 .floats { position: absolute; inset: 0; z-index: 1; }
 .float {
   position: absolute; width: clamp(150px, 15.5vw, 260px);
@@ -201,6 +217,9 @@ kbd, code { font-family: ui-monospace, "Cascadia Code", Menlo, Consolas, monospa
 }
 .media:hover .play { scale: 1.12; }
 .play svg { width: 42%; height: 42%; fill: #041018; }
+.media .preview { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .7s ease; }
+.media .preview.on { opacity: 1; }
+.media.live .play { left: auto; top: auto; right: .8rem; bottom: .7rem; translate: none; width: clamp(44px, 4.2vw, 60px); border-radius: 10px; }
 .media-label { position: absolute; left: .8rem; bottom: .7rem; z-index: 2; font: .52rem/1.6 var(--pixel-font); color: white; text-shadow: 0 2px 0 #060918; }
 
 /* ---------- featured scenes ---------- */
@@ -304,6 +323,7 @@ dialog#theater::backdrop { background: #03051299; backdrop-filter: blur(8px); }
 #theater-stage iframe { color-scheme: normal; border-radius: 13px; }
 .loading { place-self: center; text-align: center; color: var(--muted); font-size: .92rem; padding: 2rem 1rem; }
 .loading .spark { display: block; width: 44px; height: 44px; margin: 0 auto .9rem; animation: twinkle .7s steps(2, jump-none) infinite; }
+.theater-foot span { width: 100%; color: var(--text); }
 .theater-foot { padding: .6rem 1rem .9rem; color: var(--muted); font-size: .88rem; display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; border-top: 2px solid var(--border); }
 
 /* ---------- smaller screens ---------- */

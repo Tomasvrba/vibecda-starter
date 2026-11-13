@@ -34,13 +34,18 @@ function poster(game, eager = false) {
 }
 
 /** The picture: opens the video if there is one, otherwise the game itself. */
-function media(game, eager) {
+function media(game, eager, live = false) {
   if (game.video) {
+    const preview = live && game.preview && h('video', { class: 'preview', src: game.preview, loop: true, playsinline: true, preload: 'none', tabindex: '-1', 'aria-hidden': 'true' });
+    if (preview) {
+      preview.muted = true;
+      preview.addEventListener('playing', () => preview.classList.add('on'), { once: true });
+    }
     const source = game.video.type === 'x' ? 'X' : 'YouTube';
     const length = duration(game.video.seconds);
-    return h('button', { type: 'button', class: 'media', 'aria-label': `Watch the ${game.title} video`, onclick: () => openTheater(game) },
-      poster(game, eager), svg('<svg viewBox="0 0 10 10"><path d="M2 1l7 4-7 4z"/></svg>'),
-      h('span', { class: 'media-label' }, `Watch${length ? ` · ${length}` : ''} · ${source}`));
+    return h('button', { type: 'button', class: preview ? 'media live' : 'media', 'aria-label': `Watch the ${game.title} video`, onclick: () => openTheater(game) },
+      poster(game, eager), preview, svg('<svg viewBox="0 0 10 10"><path d="M2 1l7 4-7 4z"/></svg>'),
+      h('span', { class: 'media-label' }, `${preview ? 'Watch with sound' : 'Watch'}${length ? ` · ${length}` : ''} · ${source}`));
   }
   return h('a', { class: 'media', href: game.play, target: '_blank', rel: 'noopener', 'aria-label': `Play ${game.title} in a new tab` },
     poster(game, eager), h('span', { class: 'media-label' }, 'No video · opens the game'));
@@ -65,7 +70,7 @@ function actions(game, small) {
 function featureScene(game, index, total) {
   return h('section', { class: 'scene feature', id: `g-${game.id}`, 'data-model': game.model, 'data-title': game.title, 'aria-labelledby': `t-${game.id}` },
     h('div', { class: 'wrap feature-inner' },
-      h('div', { class: 'feature-media r r-media', style: '--i:0' }, media(game, index === 0)),
+      h('div', { class: 'feature-media r r-media', style: '--i:0' }, media(game, index === 0, true)),
       h('div', { class: 'sheet r', style: '--i:2' },
         tags(game, `${pad(index + 1)} / ${pad(total)}`),
         h('h2', { id: `t-${game.id}` }, game.title),
@@ -121,7 +126,7 @@ async function openTheater(game) {
   const run = ++theaterRun;
   const where = video.type === 'x' ? 'X' : 'YouTube';
   $('#theater-title').textContent = game.title;
-  $('#theater-foot').replaceChildren(external(video.url, `Open on ${where} ↗`), external(game.play, 'Play the game ↗'));
+  $('#theater-foot').replaceChildren(video.type === 'x' && h('span', {}, 'Press play inside the post to watch with sound.'), external(video.url, `Open on ${where} ↗`), external(game.play, 'Play the game ↗'));
   theater.dataset.kind = video.type;
   theater.dataset.model = game.model;
   const loading = h('p', { class: 'loading' }, `Loading the video from ${where}…`);
@@ -268,6 +273,37 @@ function setUpSky() {
   else requestAnimationFrame(loop);
 }
 
+/** Muted clips: the hero reel and each featured scene's preview play only while on screen. */
+function setUpClips(reel, games) {
+  const watch = new IntersectionObserver((entries) => {
+    for (const { target, isIntersecting } of entries) {
+      if (isIntersecting && !reduceMotion.matches) target.play().catch(() => {});
+      else target.pause();
+    }
+  }, { threshold: 0.35 });
+  document.querySelectorAll('video.preview').forEach((clip) => watch.observe(clip));
+
+  const video = $('#reel');
+  if (!reel || !video) return;
+  const byId = new Map(games.map((game) => [game.id, game]));
+  const now = $('#now');
+  let shown = -1;
+  const caption = () => {
+    const index = Math.min(reel.clips.length - 1, Math.floor(video.currentTime / reel.clipSeconds));
+    const game = byId.get(reel.clips[index]);
+    if (index === shown || !game) return;
+    shown = index;
+    now.dataset.model = game.model;
+    now.replaceChildren(h('b', {}, game.title), ` · ${game.creator}`);
+  };
+  video.muted = true;
+  video.poster = reel.poster;
+  video.src = reel.src;
+  video.addEventListener('timeupdate', caption);
+  video.addEventListener('loadeddata', () => { $('.hero').classList.add('reel-on'); caption(); }, { once: true });
+  watch.observe(video);
+}
+
 // ---------- gallery filters ----------
 function setUpFilters() {
   const state = { model: 'all', weekend: false, twoD: false, video: false };
@@ -302,10 +338,11 @@ function setUpFilters() {
 async function start() {
   setUpSky();
   let games = [];
+  let reel;
   try {
     const response = await fetch('./games.json');
     if (!response.ok) throw new Error(`games.json: HTTP ${response.status}`);
-    games = (await response.json()).games;
+    ({ games, reel } = await response.json());
   } catch (error) {
     console.error(error);
     $('#featured').append(h('p', { class: 'noscript' }, 'The game list did not load. Serve this folder over http (for example, npm run dev) instead of opening the file directly.'));
@@ -324,6 +361,7 @@ async function start() {
   for (const id of ['game-count', 'all-count']) $(`#${id}`).textContent = games.length || '';
 
   setUpFilters();
+  setUpClips(reel, games);
   setUpDeck();
   setUpHero();
   if (location.hash) $(location.hash)?.scrollIntoView();
