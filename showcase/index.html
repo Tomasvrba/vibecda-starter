@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b0f2a" />
+    <meta name="description" content="Browser games people built with Claude Fable 5.2 and Opus 5.5: what they made, how, and what it cost. A quick look before the vibeCDA game jam." />
+    <title>What can you build in a weekend? · vibeCDA showcase</title>
+    <script>document.documentElement.classList.add('js');</script>
+    <link rel="stylesheet" href="./showcase.css" />
+  </head>
+  <body>
+    <a class="skip" href="#featured">Skip to the games</a>
+
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <symbol id="spark" viewBox="0 0 7 7" shape-rendering="crispEdges">
+        <path fill="#ffd84a" d="M3 0h1v2H3zM2 2h1v1H2zM4 2h1v1H4zM0 3h2v1H0zM5 3h2v1H5zM2 4h1v1H2zM4 4h1v1H4zM3 5h1v2H3z" />
+        <path fill="#fff3a8" d="M3 2h1v1H3zM2 3h1v1H2zM4 3h1v1H4zM3 4h1v1H3z" />
+        <path fill="#fff" d="M3 3h1v1H3z" />
+      </symbol>
+    </svg>
+
+    <canvas id="sky" aria-hidden="true"></canvas>
+    <div class="progress" aria-hidden="true"><span id="progress"></span></div>
+
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="vibeCDA showcase, back to the start">
+        <svg class="spark" aria-hidden="true"><use href="#spark" /></svg>
+        <span>vibe<b>CDA</b></span><em>showcase</em>
+      </a>
+      <nav aria-label="Sections">
+        <a href="#recipe">Recipe</a>
+        <a href="#featured">Featured</a>
+        <a href="#all">All games</a>
+        <a href="#reality">Reality check</a>
+        <a href="#start">Your turn</a>
+      </nav>
+      <p class="counter" aria-hidden="true"><span id="counter">01</span> / <span id="total">06</span></p>
+    </header>
+
+    <main>
+      <section class="scene hero" id="top" data-title="Start">
+        <div class="floats" id="floats" aria-label="A few of the games"></div>
+        <div class="hero-copy">
+          <p class="eyebrow r" style="--i:0">vibeCDA 2026 · before you build</p>
+          <h1>
+            <span class="w r" style="--i:1">What</span> <span class="w r" style="--i:2">can</span> <span class="w r" style="--i:3">you</span>
+            <span class="w r" style="--i:4">build</span><br />
+            <span class="w r accent" style="--i:5">in</span> <span class="w r accent" style="--i:6">a</span> <span class="w r accent" style="--i:7">weekend?</span>
+          </h1>
+          <p class="lead r" style="--i:9"><span id="game-count">43</span> browser games people built by talking to Claude. Most are a single web page.</p>
+          <p class="legend r" style="--i:10">
+            <span class="tag tag-fable">Fable 5.2</span>
+            <span class="tag tag-opus">Opus 5.5</span>
+            <span class="legend-note">the two models that made them</span>
+          </p>
+          <p class="hero-actions r" style="--i:11">
+            <a class="btn" href="#featured">See the games</a>
+            <a class="btn btn-ghost" href="#all">Browse all</a>
+          </p>
+        </div>
+        <p class="hint r" style="--i:14" aria-hidden="true"><svg class="spark"><use href="#spark" /></svg> scroll, or press <kbd>↓</kbd> / <kbd>space</kbd></p>
+      </section>
+
+      <section class="scene recipe" id="recipe" data-title="The recipe" aria-labelledby="recipe-h">
+        <div class="wrap">
+          <p class="eyebrow r" style="--i:0">How they are made</p>
+          <h2 id="recipe-h" class="r" style="--i:1">The recipe</h2>
+          <p class="lead r" style="--i:2">No game engine to install and nothing to download. Almost every game here is built from the same four ingredients.</p>
+          <ol class="steps">
+            <li class="r" style="--i:3"><span class="num">01</span><h3>One web page</h3><p>The whole game is a single HTML file, or a small folder of them. Open it, share it, upload it to itch.io.</p></li>
+            <li class="r" style="--i:4"><span class="num">02</span><h3>Three.js for 3D</h3><p>The free 3D library most of these games use. It is already installed in your starter, next to Phaser for 2D.</p></li>
+            <li class="r" style="--i:5"><span class="num">03</span><h3>Art made by code</h3><p>Shapes, textures and animation are generated when the page loads, so there are no pictures or 3D models to make.</p></li>
+            <li class="r" style="--i:6"><span class="num">04</span><h3>Sound made by code</h3><p>Music and effects are synthesized in the browser. You describe the mood; the model writes the synthesizer.</p></li>
+          </ol>
+          <p class="aside r" style="--i:8"><svg class="spark" aria-hidden="true"><use href="#spark" /></svg> In the starter, the 3D example is <code>src/three-game.ts</code> and the 2D one is <code>src/game.ts</code>. Ask your AI tool to change one thing and watch what happens.</p>
+        </div>
+      </section>
+
+      <div id="featured" tabindex="-1"></div>
+
+      <section class="scene gallery" id="all" data-title="All games" aria-labelledby="all-h">
+        <div class="wrap">
+          <p class="eyebrow r" style="--i:0">Play them yourself</p>
+          <h2 id="all-h" class="r" style="--i:1">All <span id="all-count">43</span> games</h2>
+          <p class="lead r" style="--i:2">Every link was opened and checked today. Start with the weekend-sized ones: they were built in a few hours or less.</p>
+          <div class="filters r" style="--i:3">
+            <div class="filter-group" role="group" aria-label="Model">
+              <button type="button" data-model="all" aria-pressed="true">All</button>
+              <button type="button" data-model="fable" aria-pressed="false">Fable 5.2</button>
+              <button type="button" data-model="opus" aria-pressed="false">Opus 5.5</button>
+            </div>
+            <div class="filter-group" role="group" aria-label="Narrow down">
+              <button type="button" data-flag="weekend" aria-pressed="false">Weekend-sized</button>
+              <button type="button" data-flag="twoD" aria-pressed="false">2D</button>
+              <button type="button" data-flag="video" aria-pressed="false">Has video</button>
+            </div>
+            <p id="shown" role="status" aria-live="polite"></p>
+          </div>
+          <div class="grid" id="grid"></div>
+          <p id="empty" hidden>No games match those filters. Turn one off to see more.</p>
+        </div>
+      </section>
+
+      <section class="scene reality" id="reality" data-title="Reality check" aria-labelledby="reality-h">
+        <div class="wrap">
+          <p class="eyebrow r" style="--i:0">Before you plan your weekend</p>
+          <h2 id="reality-h" class="r" style="--i:1">Reality check</h2>
+          <p class="lead r" style="--i:2">The numbers here are what each creator reported. The showpieces are not weekend projects, and that is fine.</p>
+          <div class="truths">
+            <article class="r" style="--i:3"><h3>Showpieces cost real money</h3><p>Saltline ran for 8 hours and about $550 at API prices. Tidewater's first demo used $1,874 of tokens on a $200 subscription.</p></article>
+            <article class="r" style="--i:4"><h3>"One prompt" is rarely the whole story</h3><p>Saltline's posted version has two more hours of fixes. The voxel engine needed steering. Hogwarts Royale took a couple of weeks.</p></article>
+            <article class="r" style="--i:5"><h3>Not everything is made by code</h3><p>What the Water Keeps ships about 60 model files and AI-generated music. Tidewater uses scanned props and recorded audio.</p></article>
+            <article class="r good" style="--i:6"><h3>Small is the right size</h3><p>SUBLEVEL 07 took 40.8 minutes and $15.96. Knock It Off took 1 h 20 m. Finals Night table tennis took about an hour.</p></article>
+          </div>
+          <p class="closer r" style="--i:8">Your weekend game will be smaller than Saltline. Aim for <span class="accent">one small idea that is fun in the first ten seconds.</span></p>
+        </div>
+      </section>
+
+      <section class="scene cta" id="start" data-title="Your turn" aria-labelledby="start-h">
+        <div class="wrap">
+          <svg class="spark big r" style="--i:0" aria-hidden="true"><use href="#spark" /></svg>
+          <h2 id="start-h" class="r" style="--i:1">Your turn</h2>
+          <p class="lead r" style="--i:2">The starter already has Phaser and Three.js. Open it, describe a change, and play the result.</p>
+          <p class="hero-actions r" style="--i:3">
+            <a class="btn" href="https://codespaces.new/VibeCdA/vibecda-starter?quickstart=1" target="_blank" rel="noopener">Open the starter in Codespaces</a>
+            <a class="btn btn-ghost" href="https://vibecda.github.io/vibecda-starter/">Participant guide</a>
+          </p>
+          <div class="more r" style="--i:5">
+            <h3>Want more examples?</h3>
+            <ul>
+              <li><a href="https://fowllabs.com/fable-5-2/" target="_blank" rel="noopener">Fowl Labs: Fable 5.2 demos</a></li>
+              <li><a href="https://github.com/liang8989/awesome-fable5-2-videos" target="_blank" rel="noopener">awesome-fable5-2-videos</a></li>
+              <li><a href="https://github.com/VibeFin/awesome-opus-5.5-games" target="_blank" rel="noopener">awesome-opus-5.5-games</a></li>
+              <li><a href="https://github.com/sandbase-lab/awesome-opus-5.5" target="_blank" rel="noopener">awesome-opus-5.5</a></li>
+              <li><a href="https://github.com/magiccreator-ai/awesome-claude-opus-5-5-demos" target="_blank" rel="noopener">awesome-claude-opus-5-5-demos</a></li>
+            </ul>
+          </div>
+          <footer class="r" style="--i:7">
+            <p>Unofficial community showcase. Not affiliated with Anthropic or the creators. Details are as reported by each creator; links checked 13 Nov 2026. Pictures and videos load from the creators' own sites, X and YouTube.</p>
+          </footer>
+        </div>
+      </section>
+    </main>
+
+    <nav class="dots" id="dots" aria-label="Jump to a scene"></nav>
+
+    <dialog id="theater" aria-labelledby="theater-title">
+      <div class="theater-head">
+        <h2 id="theater-title"></h2>
+        <button type="button" id="theater-close" aria-label="Close video">Close</button>
+      </div>
+      <div id="theater-stage"></div>
+      <p class="theater-foot" id="theater-foot"></p>
+    </dialog>
+
+    <noscript><p class="noscript">This page needs JavaScript to list the games. The data is in <a href="./games.json">games.json</a>.</p></noscript>
+    <script type="module" src="./showcase.js"></script>
+  </body>
+</html>

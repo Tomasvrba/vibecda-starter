@@ -8,6 +8,7 @@ on:
       - scripts/build-hub.mjs
       - scripts/event-config.mjs
       - docs/beginners.md
+      - showcase/**
       - .github/workflows/deploy-guide.yml
 permissions:
   contents: read

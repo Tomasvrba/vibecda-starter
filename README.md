@@ -89,7 +89,7 @@ to `public/ASSETS.md`. Native-engine projects submit their own platform builds.
 | `npm run doctor` | Check installed development tools |
 | `npm test` | Check packaging and public event configuration |
 | `npm run test:browser` | Exercise the production game in Chromium |
-| `npm run hub:build` | Generate the participant event hub in `dist-hub/` |
+| `npm run hub:build` | Generate the participant event hub in `dist-hub/`, including the [showcase](showcase/README.md) |
 | `npm run event:check` | Check that event settings and destinations are ready |
 
 For browser checks outside the prepared container, first run
